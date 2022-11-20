@@ -130,7 +130,7 @@ BST<T> * BST<T>::flatten(BST<T> *root){
  * 
  */
 template <typename T>
-bool BST<T>::compareTrees(BST<T> *root1, BST<T>*root2){
+bool BST<T>::isSame(BST<T> *root1, BST<T>*root2){
 
    bool identical = false;
    if(root1 == nullptr && root2 == nullptr){
@@ -145,7 +145,7 @@ bool BST<T>::compareTrees(BST<T> *root1, BST<T>*root2){
    }
 
   if(identical == true){
-     return compareTrees(root1->left, root2->left) || compareTrees(root1->right, root2->right);
+     return isSame(root1->left, root2->left) || isSame(root1->right, root2->right);
   }
   else
      return false;

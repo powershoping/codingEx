@@ -150,7 +150,7 @@ Main drive function for building a binary tree using the preorder and inorder
  * @brief compare two trees. identical = true, otherwise = false; 
  * 
  */
-      bool compareTrees(BST<T> *root1, BST<T> *root2);
+      bool isSame(BST<T> *root1, BST<T> *root2);
       
 
 

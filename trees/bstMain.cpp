@@ -99,7 +99,7 @@ int main()
 //   bst_head1.flatten(root1);
 //   bst_head1.computeHeight(root1);
    bst_head1.printLevelOrderUsingQueue(root1);
-   std::cout<< bst_head1.compareTrees(root, root1)<<std::endl;
+   std::cout<< bst_head1.isSame(root, root1)<<std::endl;
 
    std::cout<<bst_head.search(root, 2)<<std::endl;
    std::cout<<bst_head.search(root, 123)<<std::endl;

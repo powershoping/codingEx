@@ -7,4 +7,4 @@ Coding Examples
     - [Tree Traversal](https://github.com/powershoping/codingEx/blob/master/trees/include/bstTraversal.tcc) : post-order, in-order, pre-order tranversal
     - [Tree Operations](https://github.com/powershoping/codingEx/blob/master/trees/include/bstOperation.tcc) : search, height, sum of leaves, sum, flatten, compare, 
 2. Sorting method:    
-    - [ ]() :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
+    - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort

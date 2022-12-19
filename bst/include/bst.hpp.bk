@@ -1,0 +1,12 @@
+#ifndef  BINARY_SEARCH_TREE_HPP_
+#define  BINARY_SEARCH_TREE_HPP_
+ 
+#include<unordered_map>
+#include<vector>
+
+#include "bst.h"
+#include "bstBuild.cpp"
+#include "bstTraversal.cpp"
+#include "bstOperation.cpp"
+
+#endif

@@ -22,6 +22,7 @@ void swap( T &a1, T &a2)
    a2 = tmp;
 }
 
+// selecting the minimum element from (ii-size) and then swap it to the right position (ii)
 template <typename T >
 int selectionSort(std::vector<T> &vec){
    const int size = vec.size();
@@ -49,7 +50,8 @@ int selectionSort(std::vector<T> &vec){
    std::cout << "swap       count == " << count << std::endl;
    return count+cmp_count;
 }
-
+// insert the incomming element (ii) to the already sorted sequence by swapping it with already sorted element (ii, 0) one by one, and swapping stops 
+// if the incoming element (ii) is in the right position.
 template <typename T>
 int insertionSort(std::vector<T> &vec){
    int size = vec.size();
@@ -73,7 +75,8 @@ int insertionSort(std::vector<T> &vec){
    std::cout << "swap       count == " << count << std::endl;
    return count+cmp_count;
 }
-
+// repeatedly swapping the adjacent elements if they are in the wrong order, for the ith-pass, the last ith elements are already sort. (N-i to i) if no 
+// swap happens in a pass, then the squence is sorted. 
 template <typename T>
 int bubbleSort(std::vector<T> & vec){
    int sz = vec.size();
@@ -137,6 +140,8 @@ void mergeSort(std::vector<T> &vec ){
    mergeSort(rightVec);
    mergeMS(leftVec, rightVec, vec);
 }
+
+
 template <typename T>
 int partitionQS(std::vector<T> &vec, const int start, const int end){
    const T pivot = vec[end];
@@ -209,13 +214,12 @@ radix sort
 */
 
 template <typename T, typename = typename std::enable_if<std::is_unsigned<T>::value>::type >
-void radixSort(std::vector<T> &vec, int exp){
+void radixSort(std::vector<T> &vec, const int exp, const int base){
    const int sz = vec.size();
    std::vector<int> idx(sz,0);
    std::vector<T> result(sz,0);
-   const int base = 10;
    std::vector<int> dAArrays(base,0);
-// maxVal decides the sweeps of the counting sort.    
+
    for(int ii = 0; ii < sz; ++ii){
       idx [ii] = (vec[ii]/exp)%base; 
       dAArrays[ idx[ii] ] ++;
@@ -234,13 +238,14 @@ template <typename T, typename = typename std::enable_if<std::is_unsigned<T>::va
 void radixSort(std::vector<T> &vec){
    int sz = vec.size();
 // maxVal decides the sweeps of the counting sort.    
+   const int base = 10;
    T maxVal = vec[0];
    for(int ii = 1; ii < sz; ++ii){
       if(vec[ii]>maxVal)maxVal = vec[ii];
    }
 
-   for(int exp = 1; maxVal/exp>0; exp *=10){
-      radixSort(vec, exp);
+   for(int exp = 1; maxVal/exp>0; exp *=base){
+      radixSort(vec, exp, base);
    }
 
 }

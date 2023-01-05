@@ -10,5 +10,5 @@ Coding Examples
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
 3. Bit manipulation: 
     - [bitManipulation.cpp] ()
-         - Sum of two integer [leetcode 371]( https://leetcode.com/problems/sum-of-two-integers/description/)
-         - Minimum number of bit-flips to make two integers the same [leetcode 2220](https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/)
+         -  [leetcode 370]( https://leetcode.com/problems/sum-of-two-integers/description/) : Sum of two integer
+         -  [leetcode 2220](https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/) :  Minimum number of bit-flips to make two integers the same

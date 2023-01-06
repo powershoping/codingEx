@@ -151,6 +151,7 @@ Main drive function for building a binary tree using the preorder and inorder
  * 
  */
       bool isSame(BST<T> *root1, BST<T> *root2);
+      bool isSame1(BST<T> *root1, BST<T> *root2);
       
 
 

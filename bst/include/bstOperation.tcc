@@ -93,15 +93,16 @@ template <typename T>
 T BST<T>::sumTree(BST<T> *root){
    if(root==nullptr)
       return 0;
-   if(root->left==nullptr && root->right==nullptr) {
-      root->sum=root->data;
-   }
+//   if(root->left==nullptr && root->right==nullptr) { //not necessary. 1st round. 
+//      root->sum=root->data;
+//   }
       
    root->sum =root->data + sumTree(root->left) + sumTree(root->right);
 
    return root->sum;
 }
 
+// leetcode 114 : https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
 
 /**
  * @brief flatten the tree to a single linked list 
@@ -125,12 +126,15 @@ BST<T> * BST<T>::flatten(BST<T> *root){
   return root;
 }
 
+// leetcode 100 : https://leetcode.com/problems/same-tree/description/
+
 /**
  * @brief compare two trees. identical = true, otherwise = false; 
- * 
+ *   
  */
+
 template <typename T>
-bool BST<T>::isSame(BST<T> *root1, BST<T>*root2){
+bool BST<T>::isSame1(BST<T> *root1, BST<T>*root2){ // redundant cocde. 1 round. 
 
    bool identical = false;
    if(root1 == nullptr && root2 == nullptr){
@@ -149,8 +153,23 @@ bool BST<T>::isSame(BST<T> *root1, BST<T>*root2){
   }
   else
      return false;
-
 }
 
+template <typename T>
+bool BST<T>::isSame(BST<T> *root1, BST<T>*root2){
+
+   if(root1 == nullptr && root2 == nullptr){ //if two Trees come to the nullptr roots, then trees must be the same. 
+      return true;
+   }
+   if(!root1 || !root2){
+      return false;
+   }
+   if(root1 && root2 && root1->data != root2->data){// any data point not the same will lead to the trees not the same. 
+      return false;
+   }
+
+
+   return isSame(root1->left, root2->left) || isSame(root1->right, root2->right);
+}
 
 #endif

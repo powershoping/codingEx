@@ -1,0 +1,7 @@
+# Bit Manipulation 
+1. **NOT(~)**: A unary operator that flips the bits of the current number, i.e., if the current bit is 0, it changes it to 1 and vice versa. ` N=5=0b101; ~N=~(0b101)=0b010=2`. INT_MAX is NOT of INT_MIN, i.e., `INT_MAX = ~INT_MIN`
+2. **AND(&)** : If both bits in the compared position of the bit pattern are 1, the bit in the resulting bit pattern is 1, otherwise 0. `A=5=0b101; B=1=0b001; A&B= 0b101 & 0b001 = 0b001 =1`
+3. **OR(|)** : If both bits in the compared position of the bit pattern are 0, the bit in the resulting bit pattern is 0, otherwise 1. `A=5=0b101; B=1=0b001; A | B = 0b101 | 0b001 = 0b010 = 101`
+4. **XOR(^)** : If both bits are 0 or 1, the result will be zero, other wise 1. Same 0, different 1. 
+5. **Left Shift(<<)** : A binary operator which shifts some number of bits to the left and append 0 at the end.  One left shift is equivalent to multiplying the bit pattern with 2. `A=5=0b00101; C=A<<1=0b01010=10; D=A<<2=0b10100=20;`
+6. **Right Shift(>>)** : A binary operator which shifts some number of bits to the right and append 0 at the left side. One right shift is equivalent to dividing the bit pattern with 2. `A=5=0b00101; B=A>>1=0b00010=2; C=A>>2=0b00001=1; C=A>>3=0b00000=0;` 

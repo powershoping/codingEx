@@ -15,5 +15,5 @@ Coding Examples
     -  [leetcode 29  ]( https://leetcode.com/problems/divide-two-integers/description/)  : Division of two intergers
     -  [leetcode 2220](https://leetcode.com/problems/minimum-bit-flips-to-convert-number/description/) :  Minimum number of bit-flips to make two integers the same
     -  [leetcode 1470]( https://leetcode.com/problems/shuffle-the-array/description/ ) : Shuffle array A of length 2N so that A[i] and A[N+i] are neigbors
-    -  [leetcode 7   ](https://leetcode.com/problems/reverse-integer/description/)  : reverse the interger, e.g. 123==>321
-    -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : reverse the binary, e.g. 100110(38) ==> 011001(25)
+    -  [leetcode 7   ](https://leetcode.com/problems/reverse-integer/description/)  : Reverse the interger, e.g. 123==>321
+    -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : Reverse the binary, e.g. 100110(38) ==> 011001(25)

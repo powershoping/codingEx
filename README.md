@@ -7,7 +7,10 @@ Coding Examples
     - [BST Tree Traversal](https://github.com/powershoping/codingEx/blob/master/bst/include/bstTraversal.tcc) : post-order, in-order, pre-order tranversal
     - [BST Tree Operations](https://github.com/powershoping/codingEx/blob/master/bst/include/bstOperation.tcc) : search, height, sum of leaves, sum, flatten, 
     compare, 
-    - [Binary Tree](https://github.com/powershoping/codingEx/blob/master/binaryTree/src/binaryTree.cpp): [binaryTree.md](https://github.com/powershoping/codingEx/blob/master/binaryTree/binaryTree.md)
+    - [Binary Tree](https://github.com/powershoping/codingEx/blob/master/binaryTree/src/binaryTree.cpp): some information [binaryTree.md](https://github.com/powershoping/codingEx/blob/master/binaryTree/binaryTree.md)
+       - [leetCode 1302 ](https://leetcode.com/problems/deepest-leaves-sum/description/) : deepestLevavesSum using BFS and DFS
+       - [leetcode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/) : Binary Tree Zigzag Level Order Traversal
+       - [leetcode 236](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) : Lowest Common Ancestor of a Binary Tree
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
 3. Bit manipulation : [bitManipulation.cpp]( https://github.com/powershoping/codingEx/blob/master/leetCode/bitManipulation.cpp) and [bitManipulation.md](https://github.com/powershoping/codingEx/blob/master/leetCode/bitManipulation.md) 

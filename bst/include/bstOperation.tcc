@@ -55,6 +55,7 @@ T BST<T>::sumLeaves(BST<T> *root){
    return sumLeaves(root->left) + sumLeaves(root->right);
 }
 
+// leetcode 404 : https://leetcode.com/problems/sum-of-left-leaves/description/
 /**
  * @brief sum of all the left leaves
  * 
@@ -79,7 +80,7 @@ T BST<T>::sumRightLeaves(BST<T> *root){
    if(root==nullptr)
       return 0;
    if(root->right && root->right->left==nullptr && root->right->right==nullptr)
-      return root->right->data + sumLeftLeaves(root->left);
+      return root->right->data + sumRightLeaves(root->left);
 
    return sumRightLeaves(root->left) + sumRightLeaves(root->right);
 }

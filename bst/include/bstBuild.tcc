@@ -94,7 +94,7 @@ BST<T>* BST<T>::buildSubTreeUsingPreInOrders(std::vector<T>& preorder,  std::vec
       return nullptr;
 
    T data = preorder[pre_index];
-   std::cout<<"pre_index"<<pre_index<<std::endl;
+//   std::cout<<"pre_index"<<pre_index<<std::endl;
    pre_index ++;
    auto cur_node = new BST<T>(data); // here post ++ is used as pre_index is used first then increase it by 1. 
    int in_index = umap[data];

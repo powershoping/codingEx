@@ -17,7 +17,7 @@
 
 
 
- -*  Adaptive: performing less operations if the sequence is partially sorted
+ - ^  Adaptive: performing less operations if the sequence is partially sorted
 
  - [x] Insertion sort works quite fast for nearly sorted arrays and is a good option for a doubly linked list. The swap of the insertion sort is local, i.e., the swap happens between two neigboring node, and the doulbly linked list has both forward and backward pointers. 
  - [x] For linked lists, merge sort can be performed in place, not using extra memory, since the merging of the nodes in a linked list can be done in O(1) time without using an extra array.  Quick sort is worse for linked lists, the swapping is more of global, and this is something that linked structures are bad at. 

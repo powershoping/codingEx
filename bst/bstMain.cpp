@@ -74,10 +74,10 @@ int main()
    BST<int>  bst_head1;//empty object, used to as a handle to access the BST methods.
 //   std::vector<int> vec_pre1={1,2};
 //   std::vector<int> vec_in1={2,1};
-//   root1 = bst_head1.buildTreeUsingPreInOrders(vec_pre1, vec_in1);
+   root1 = bst_head1.buildTreeUsingPreInOrders(vec_pre, vec_in);
 //   vec_post.push_back(123);
 //   vec_in.push_back(123);
-   root1=bst_head1.buildTreeUsingPostInOrders(vec_post,vec_in);
+//   root1=bst_head1.buildTreeUsingPostInOrders(vec_post,vec_in);
 
    bst_head1.computeHeight(root1);
    bst_head1.sumTree(root1);

@@ -94,7 +94,7 @@ void printLevelOrder(TreeNode* root)
    }
    std::cout<<"]\n";
 }
-
+// [leetcode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/) : Binary Tree Zigzag Level Order Traversal
 std::vector<std::vector<int>> zigZagLevelTranversal(TreeNode* root)
 {
    if(!root) return std::vector<std::vector<int>>();
@@ -143,33 +143,28 @@ std::vector<std::vector<int>> zigZagLevelTranversal(TreeNode* root)
 
    return levelOrders;
 }
-//if find in the left and right of the root, then return root. 
-
-TreeNode *lowestCommonAncestor(TreeNode *root,  const int pp, const int qq, TreeNode* &lca){
-   if(!root) return nullptr;
-   if(root->val == pp || root->val == qq ){
-      return root; 
+//if find in the left and right of the root, then return root.
+// two senario: 1) a split of current node tells the current node is the lca. 2) on one side of the tree, return the root no more deep traversal. 
+// [leetcode 236](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) : Lowest Common Ancestor of a Binary Tree
+TreeNode *lowestCommonAncestor(TreeNode *root, const int pp, const int qq, TreeNode *&lca)
+{
+   if (!root)
+      return nullptr;
+   if (root->val == pp || root->val == qq)
+   {
+      return root;
    }
-   TreeNode *left=nullptr, *right=nullptr;
-   if(!lca){
-      left  = lowestCommonAncestor(root->left,  pp, qq, lca);
-      right = lowestCommonAncestor(root->right, pp, qq, lca);
-   }
-   if(left && right ){
+   left = lowestCommonAncestor(root->left, pp, qq, lca);
+   right = lowestCommonAncestor(root->right, pp, qq, lca);
+   if (left && right)
+   {
       lca = root;
       return root;
    }
-   return  left!=nullptr? left : right;
-}
-TreeNode *lowestCommonAncestor(TreeNode *root, const int pp, const int qq)
-{
-   TreeNode *lca = nullptr;
-   auto lca1 = lowestCommonAncestor(root, pp, qq, lca);
-   return lca!=nullptr? lca : lca1;
+   return left != nullptr ? left : right;
 }
 
-
-
+// [leetcode 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/) :  Binary Tree Maximum Path Sum
 int maxPathSum(TreeNode *root, int &maxSum){
    if(!root) return 0;
 
@@ -192,28 +187,27 @@ int maxPathSum(TreeNode *root){
 
    return maxSum;
 }
+
+// idea of prefix sum is used here. if(umap[prefixSum[i]-targetSum]) count += umap[prefixSum[i]-targetSum];        
+// [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
 void pathCountDownWard(TreeNode *root, int targetSum, std::unordered_map<long int, int> &umap, int rSum, int &count){
    if(!root) return;
    rSum += root->val;
-   if(rSum == targetSum ){
-       count ++;
-   }
-   count += umap[rSum - targetSum];
+   if(umap.find(rsum-targetSum)!=umap.end())
+      count += umap[rSum - targetSum];
 
    umap[rSum] ++;
-
    pathCountDownWard(root->left, targetSum, umap, rSum, count);
    pathCountDownWard(root->right, targetSum, umap, rSum, count);
-
    umap[rSum] --;
-
-
 }
 int numDownWardPathsSum(TreeNode *root, int targetSum)
 {
    long int rSum=0; //running Sum
    int count = 0;
    std::unordered_map<long int, int> umap;
+   umap[0]=1; // if the prefix sum == target, we need to have this as the edge case. 
+
    pathCountDownWard(root, targetSum, umap, rSum, count);
 
    return count;
@@ -257,7 +251,6 @@ bool hasPathSum(TreeNode* root, int targetSum){
 
  // backtracking needed as we are passing curPath by reference, so all the nodes share the same curPath. 
  //so pop_back is need if the path does not have a sum of targetSum. 
- // so no code for back tracking neccessary. 
 void findPathByRef(TreeNode *root, int targetSum, std::vector<int> &curPath, std::vector<std::vector<int>> &paths){
    if(!root)return;
 
@@ -337,7 +330,7 @@ void correctBST(TreeNode *root){
    last->val = tmp;
 }
 
-//leetCode 1302 : https://leetcode.com/problems/deepest-leaves-sum/description/
+//[leetCode 1302 ](https://leetcode.com/problems/deepest-leaves-sum/description/) : deepestLevavesSum using BFS and DFS
 //using BFS (needs a queue) and DFS
 int deepestLeavesSumBFS(TreeNode *root)
 {

@@ -146,7 +146,7 @@ std::vector<std::vector<int>> zigZagLevelTranversal(TreeNode* root)
 //if find in the left and right of the root, then return root.
 // two senario: 1) a split of current node tells the current node is the lca. 2) on one side of the tree, return the root no more deep traversal. 
 // [leetcode 236](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) : Lowest Common Ancestor of a Binary Tree
-TreeNode *lowestCommonAncestor(TreeNode *root, const int pp, const int qq, TreeNode *&lca)
+TreeNode *lowestCommonAncestor(TreeNode *root, const int pp, const int qq)
 {
    if (!root)
       return nullptr;
@@ -154,11 +154,10 @@ TreeNode *lowestCommonAncestor(TreeNode *root, const int pp, const int qq, TreeN
    {
       return root;
    }
-   left = lowestCommonAncestor(root->left, pp, qq, lca);
-   right = lowestCommonAncestor(root->right, pp, qq, lca);
+   auto left = lowestCommonAncestor(root->left, pp, qq);
+   auto right = lowestCommonAncestor(root->right, pp, qq);
    if (left && right)
    {
-      lca = root;
       return root;
    }
    return left != nullptr ? left : right;
@@ -193,7 +192,7 @@ int maxPathSum(TreeNode *root){
 void pathCountDownWard(TreeNode *root, int targetSum, std::unordered_map<long int, int> &umap, int rSum, int &count){
    if(!root) return;
    rSum += root->val;
-   if(umap.find(rsum-targetSum)!=umap.end())
+   if(umap.find(rSum-targetSum)!=umap.end())
       count += umap[rSum - targetSum];
 
    umap[rSum] ++;
@@ -212,26 +211,39 @@ int numDownWardPathsSum(TreeNode *root, int targetSum)
 
    return count;
 }
-// https://leetcode.com/problems/longest-univalue-path/description/
-int lengthLongestUnivaluePath(TreeNode *root, int &length){
-    if(!root)return 0;
-    int leftLen =0, rightLen= 0;
-    if(root->left && root->left->val == root->val){
-      leftLen  += 1 + lengthLongestUnivaluePath(root->left, length);
-    }
-    if(root->right && root->right->val == root->val){
-      rightLen += 1+ lengthLongestUnivaluePath(root->right, length);
-    }
+// [leetcode 687](https://leetcode.com/problems/longest-univalue-path/description/) : the length of the longest path of a binary tree, where each node in the path has the same value.
+int longestUnivaluePath(TreeNode *root, int &maxLength)
+{
+   if (!root)
+      return 0;
 
-    length = std::max(length, leftLen+rightLen);
+   int ll = longestUnivaluePath(root->left, maxLength);
+   int rr = longestUnivaluePath(root->right, maxLength);
+   int leftMax = 0, rightMax = 0;
 
-    return std::max(leftLen, rightLen);
+   if (root->left && root->val == root->left->val)
+   {
+      leftMax = ll + 1;
+   }
+   if (root->right && root->val == root->right->val)
+   {
+      rightMax = rr + 1;
+   }
+
+   int max1side = std::max(leftMax, rightMax);
+   maxLength = std::max(maxLength, max1side);
+   if ((root->left && root->right) && (root->val == root->left->val && root->val == root->right->val))
+   {
+      maxLength = std::max(maxLength, leftMax + rightMax);
+   }
+
+   return max1side;
 }
 
 int lengthLongestUnivaluePath(TreeNode *root){
     int length = 0;
 
-    lengthLongestUnivaluePath(root, length);
+    longestUnivaluePath(root, length);
     return length;
 
 }
@@ -422,10 +434,10 @@ int deepestLeavesSumDFS(TreeNode *root)
    auto rootLCA = buildUsingLevelOrder(vecLCA);
    std::cout<<lowestCommonAncestor(rootLCA, 5, 1)->val<<std::endl;
 
-   std::vector<int> vecLUP{5, 4, 5, 1, 1, INT_MAX, 5};
+   //std::vector<int> vecLUP{5, 4, 5, 1, 1, INT_MAX, 5};
+   std::vector<int> vecLUP{1, 4, 5, 4, 4, INT_MAX, 5};
    auto rootLUP = buildUsingLevelOrder(vecLUP);
    std::cout<<lengthLongestUnivaluePath(rootLUP)<<std::endl;
-
 
    std::vector<int> vecCorrectBST{2,3,1};
    auto rootCBST=buildUsingLevelOrder(vecCorrectBST);

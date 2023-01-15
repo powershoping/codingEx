@@ -13,6 +13,8 @@ Coding Examples
        - [leetcode 236](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) : Lowest Common Ancestor of a Binary Tree
        - [leetcode 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/) :  Binary Tree Maximum Path Sum
        - [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
+       - [leetcode 687](https://leetcode.com/problems/longest-univalue-path/description/) : The length of the longest path of a binary tree, where each node in the path has the same value.
+
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
 3. Bit manipulation : [bitManipulation.cpp]( https://github.com/powershoping/codingEx/blob/master/leetCode/bitManipulation.cpp) and [bitManipulation.md](https://github.com/powershoping/codingEx/blob/master/leetCode/bitManipulation.md) 

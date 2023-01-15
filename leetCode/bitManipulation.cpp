@@ -181,8 +181,47 @@ int divide(int dividend, int divisor)
    }
 }
 
+//leetcode 7 : https://leetcode.com/problems/reverse-integer/description/
+int reverseInt(int org_x)
+{
+    int rev_x = 0;
+    while(org_x!=0)
+    {
+        int rem = org_x%10;
+        org_x = org_x / 10;
+        if(rev_x>INT_MAX/10 || rev_x==INT_MAX/10 && rem>7)
+            return 0;
+        if(rev_x<INT_MIN/10 || rev_x==INT_MIN/10 && rem<-8)
+            return 0;
+        rev_x = rev_x*10 + rem;
+    }
+    return rev_x;
+}
+
+//leetcode 190 : https://leetcode.com/problems/reverse-bits/description
+uint32_t reverseBitInt(uint32_t org_x){
+
+   uint32_t rev_x=0;
+   while (org_x)
+   {
+      std::cout<<(org_x&1)<<std::endl;
+      rev_x<<=1;
+      if (org_x &1 ){
+         rev_x ++;
+      }
+      org_x=org_x>>1;
+   }
+
+   return rev_x;
+}
 int main()
 {
+//
+   std::cout << reverseInt(4) << std::endl;
+   std::cout << reverseInt(-405) << std::endl;
+   std::cout << reverseInt(1147483647) << std::endl;
+   std::cout << reverseBitInt(11) << std::endl;   //leetcode 190
+
    std::cout<<"Minimum bit flips is"<<minBitFlips(10,7)<<std::endl; //leetcode 2220.
 
    std::vector<size_t> vec1{1, 2, 4, 6, 8, 11, 15, 14, 19, 20};

@@ -11,8 +11,8 @@ Coding Examples
        - [leetCode 1302 ](https://leetcode.com/problems/deepest-leaves-sum/description/) : deepestLevavesSum using BFS and DFS
        - [leetcode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/) : Binary Tree Zigzag Level Order Traversal
        - [leetcode 236](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) : Lowest Common Ancestor of a Binary Tree
-       - [leetcode 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/) :  Binary Tree Maximum Path Sum
        - [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
+       - [leetcode 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/) :  Binary Tree Maximum Path Sum; Similar to leetcode 687
        - [leetcode 687](https://leetcode.com/problems/longest-univalue-path/description/) : The length of the longest path of a binary tree, where each node in the path has the same value.
 
 2. Sorting method:    

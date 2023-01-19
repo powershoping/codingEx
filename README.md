@@ -16,6 +16,7 @@ Coding Examples
        - [leetcode 112](https://leetcode.com/problems/path-sum/description/) : Path Sum.  A tree has a root-to-leaf path such that the sume of all the nodes along the path equals targetSum.
        - [leetcode 113](https://leetcode.com/problems/path-sum-ii/description/) : Path Sum II. all the root-to-leaf paths having the sum equals to target sum. 
        - [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
+       - [leetcode 99](https://leetcode.com/problems/recover-binary-search-tree/description/) : correct a BST tree which has exactly two nodes swapped.
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
@@ -26,3 +27,5 @@ Coding Examples
     -  [leetcode 1470]( https://leetcode.com/problems/shuffle-the-array/description/ ) : Shuffle array A of length 2N so that A[i] and A[N+i] are neigbors
     -  [leetcode 7   ](https://leetcode.com/problems/reverse-integer/description/)  : Reverse the interger, e.g. 123==>321
     -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : Reverse the binary, e.g. 100110(38) ==> 011001(25)
+4. Heap: buidHeap, heapfyUp, isHeap [heap.cpp](https://github.com/powershoping/codingEx/blob/master/heap/src/heap.cpp)
+5. LinkedList : build and merge k lists [LinkedList.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/LinkedList.cpp)

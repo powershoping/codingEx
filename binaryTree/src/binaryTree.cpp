@@ -163,6 +163,7 @@ TreeNode *lowestCommonAncestor(TreeNode *root, const int pp, const int qq)
    return left != nullptr ? left : right;
 }
 
+
 // [leetcode 124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/) :  Binary Tree Maximum Path Sum
 int maxPathSum(TreeNode *root, int &maxSum){
    if(!root) return 0;
@@ -187,30 +188,6 @@ int maxPathSum(TreeNode *root){
    return maxSum;
 }
 
-// idea of prefix sum is used here. if(umap[prefixSum[i]-targetSum]) count += umap[prefixSum[i]-targetSum];        
-// [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
-void pathCountDownWard(TreeNode *root, int targetSum, std::unordered_map<long int, int> &umap, int rSum, int &count){
-   if(!root) return;
-   rSum += root->val;
-   if(umap.find(rSum-targetSum)!=umap.end())
-      count += umap[rSum - targetSum];
-
-   umap[rSum] ++;
-   pathCountDownWard(root->left, targetSum, umap, rSum, count);
-   pathCountDownWard(root->right, targetSum, umap, rSum, count);
-   umap[rSum] --;
-}
-int numDownWardPathsSum(TreeNode *root, int targetSum)
-{
-   long int rSum=0; //running Sum
-   int count = 0;
-   std::unordered_map<long int, int> umap;
-   umap[0]=1; // if the prefix sum == target, we need to have this as the edge case. 
-
-   pathCountDownWard(root, targetSum, umap, rSum, count);
-
-   return count;
-}
 // [leetcode 687](https://leetcode.com/problems/longest-univalue-path/description/) : the length of the longest path of a binary tree, where each node in the path has the same value.
 int longestUnivaluePath(TreeNode *root, int &maxLength)
 {
@@ -248,11 +225,7 @@ int lengthLongestUnivaluePath(TreeNode *root){
 
 }
 
-/*****BEGIN BEGIN BEGIN BEGIN BEGIN BEGIN *******************************************/
-/*                                                                                  */
-/* Path from the root to a leaf                                                     */
-/*                                                                                  */
-/************************************************************************************/
+// [leetcode 112](https://leetcode.com/problems/path-sum/description/) : Path Sum.  A tree has a root-to-leaf path such that the sume of all the nodes along the path equals targetSum.
 bool hasPathSum(TreeNode* root, int targetSum){
    if(!root)return false;
    if(root->left == nullptr && root->right == nullptr )
@@ -263,6 +236,9 @@ bool hasPathSum(TreeNode* root, int targetSum){
 
  // backtracking needed as we are passing curPath by reference, so all the nodes share the same curPath. 
  //so pop_back is need if the path does not have a sum of targetSum. 
+
+
+// [leetcode 113](https://leetcode.com/problems/path-sum-ii/description/) : Path Sum II. all the root-to-leaf paths having the sum equals to target sum. 
 void findPathByRef(TreeNode *root, int targetSum, std::vector<int> &curPath, std::vector<std::vector<int>> &paths){
    if(!root)return;
 
@@ -315,6 +291,36 @@ std::vector<std::vector<int>>pathSum(TreeNode *root, int targetSum )
    return paths;
 }
 
+
+// idea of prefix sum is used here. if(umap[prefixSum[i]-targetSum]) count += umap[prefixSum[i]-targetSum];        
+// [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
+void pathCountDownWard(TreeNode *root, int targetSum, std::unordered_map<long int, int> &umap, int rSum, int &count){
+   if(!root) return;
+   rSum += root->val;
+   if(umap.find(rSum-targetSum)!=umap.end())
+      count += umap[rSum - targetSum];
+
+   umap[rSum] ++;
+   pathCountDownWard(root->left, targetSum, umap, rSum, count);
+   pathCountDownWard(root->right, targetSum, umap, rSum, count);
+   umap[rSum] --;
+}
+int numDownWardPathsSum(TreeNode *root, int targetSum)
+{
+   long int rSum=0; //running Sum
+   int count = 0;
+   std::unordered_map<long int, int> umap;
+   umap[0]=1; // if the prefix sum == target, we need to have this as the edge case. 
+
+   pathCountDownWard(root, targetSum, umap, rSum, count);
+
+   return count;
+}
+// 1, 2, 3, 4, 6, 5, 7, 8 ; single pair of (6,5) in wrong order ==> (5,6) will correct the tree
+// 1, 7, 3, 4, 5, 6, 2, 8 ; two pairs (7, 3) and (6, 2), swap 7 and 2 will correct the tree. 
+// we need remember pre node/value to compare with current node. if wrong order, the set first to prev, and last to the root(current). if 2nd wrong
+// order then just need to set root to last. switch first and last will correct the bst. 
+//[leetcode 99](https://leetcode.com/problems/recover-binary-search-tree/description/) : correct a BST tree which has exactly two nodes swapped.
 void find2Nodes(TreeNode *root, TreeNode* &prev, TreeNode* &first, TreeNode * &last){
    if(!root) return;
    
@@ -454,8 +460,8 @@ int deepestLeavesSumDFS(TreeNode *root)
 
    std::vector<int> vecSumDeepestLeaves{1,2,3,4,5,INT_MAX,6,7,INT_MAX,INT_MAX,INT_MAX, INT_MAX,8};
    auto rootSDL = buildUsingLevelOrder(vecSumDeepestLeaves);
-   std::cout<<deepestLeavesSumBFS(rootSDL)<<std::endl;
-   std::cout<<deepestLeavesSumDFS(rootSDL)<<std::endl;
+   std::cout<<"deepestLeavesSumBFS= "<<deepestLeavesSumBFS(rootSDL)<<std::endl;
+   std::cout<<"deepestLeavesSumDFS= "<<deepestLeavesSumDFS(rootSDL)<<std::endl;
 
  }
 

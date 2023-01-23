@@ -2,8 +2,12 @@
 #include <vector>
 #include <queue>
 #include <limits.h>
+#include <map>
 #include <unordered_map>
+#include <set>
 #include <deque>
+#include <algorithm>
+
 
 template<typename T>
 std::ostream &operator <<(std::ostream &out, const std::vector<T> vec){
@@ -400,7 +404,94 @@ int deepestLeavesSumDFS(TreeNode *root)
    }
    return sum;
 }
+//[leetcode 987 ](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/) : vertical traversal of a binary tree. 
+// using std::vector< std::pair< std::pair<int, int>, int > >  and a customer's defined comparison functor. std::pair can do lexicographical comparison. 
+//
+void verticalTraversal(TreeNode *root, std::vector< std::pair< std::pair<int, int>, int > > &vecPairs, int xAxis, int height){
+   if(root == nullptr)return;
+   verticalTraversal(root->left, vecPairs,  xAxis-1, height+1);
+   vecPairs.push_back({{xAxis, height}, root->val});
+   verticalTraversal(root->right, vecPairs, xAxis+1, height+1);
+   return;
+}
+std::vector<std::vector<int>> verticalTraversalVec(TreeNode *root)
+{
+   {
+      std::vector<std::pair<std::pair<int, int>, int>> vecPairs; // < <xAxis, Hieght>, nodeVal>
+      int xAxis = 0;
+      int height = 0;
+      if (root == nullptr)
+         return std::vector<std::vector<int>>();
 
+      verticalTraversal(root, vecPairs, xAxis, height);
+
+      class vecPairComp
+      {
+      public:
+         bool operator()(std::pair<std::pair<int, int>, int> aa, std::pair<std::pair<int, int>, int> bb) const
+         {
+            if (aa.first == bb.first)
+            {
+               return aa.second < bb.second;
+            }
+            return aa.first < bb.first;
+         }
+      };
+
+      std::sort(vecPairs.begin(), vecPairs.end(), vecPairComp());
+
+      const size_t sz = vecPairs.size();
+      std::vector<int> vec;
+      std::vector<std::vector<int>> results;
+      xAxis = vecPairs[0].first.first;
+      for (size_t ii = 0; ii < sz; ++ii)
+      {
+         if (xAxis != vecPairs[ii].first.first)
+         {
+            xAxis = vecPairs[ii].first.first;
+            results.push_back(vec);
+            vec.clear();
+         }
+         vec.push_back(vecPairs[ii].second);
+      }
+      results.push_back(vec);
+
+      return results;
+   }
+}
+// std::map way uses more memory and is not faster than the std::vector way. 
+void verticalTraversal(TreeNode *root, std::map<int, std::map<int, std::multiset<int>>> &vtmap, int xAxis, int height)
+{
+   if (root == nullptr)
+      return;
+   verticalTraversal(root->left, vtmap, xAxis - 1, height + 1);
+   vtmap[xAxis][height].insert(root->val);
+   verticalTraversal(root->right, vtmap, xAxis + 1, height + 1);
+   return;
+}
+
+std::vector<std::vector<int>> verticalTraversalMap(TreeNode *root)
+{
+   if (root == nullptr)
+      return std::vector<std::vector<int>>();
+   std::map<int, std::map< int, std::multiset<int> > > vtmap;
+   std::vector<std::vector<int>> results;
+   int xAxis  =0;
+   int height =0;
+   verticalTraversal(root, vtmap, xAxis, height);
+
+   const size_t sz = vtmap.size();
+   for (const auto el : vtmap)
+   {
+      std::vector<int> vec;
+      for (const auto el0 : el.second)
+      {
+         vec.insert(vec.end(), el0.second.begin(), el0.second.end() );
+      }
+      results.push_back(vec);
+   }
+   return results;
+}
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -462,6 +553,11 @@ int deepestLeavesSumDFS(TreeNode *root)
    auto rootSDL = buildUsingLevelOrder(vecSumDeepestLeaves);
    std::cout<<"deepestLeavesSumBFS= "<<deepestLeavesSumBFS(rootSDL)<<std::endl;
    std::cout<<"deepestLeavesSumDFS= "<<deepestLeavesSumDFS(rootSDL)<<std::endl;
+   
+   std::vector<int> vecVertTrvsl{3,9,20,INT_MAX,INT_MAX,15,7};
+   auto rootVTrsl=buildUsingLevelOrder(vecVertTrvsl);
+   std::cout<<verticalTraversalMap(rootVTrsl)<<std::endl;
+
 
  }
 

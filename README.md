@@ -17,6 +17,7 @@ Coding Examples
        - [leetcode 113](https://leetcode.com/problems/path-sum-ii/description/) : Path Sum II. all the root-to-leaf paths having the sum equals to target sum. 
        - [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
        - [leetcode 99](https://leetcode.com/problems/recover-binary-search-tree/description/) : correct a BST tree which has exactly two nodes swapped.
+       - [leetcode 987 ](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/) : vertical traversal of a binary tree. std::map of std::map std::multiset; and std::vector of std::pair
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort

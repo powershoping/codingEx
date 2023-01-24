@@ -7,7 +7,7 @@
 #include <set>
 #include <deque>
 #include <algorithm>
-
+#include <iomanip>
 
 template<typename T>
 std::ostream &operator <<(std::ostream &out, const std::vector<T> vec){
@@ -492,6 +492,87 @@ std::vector<std::vector<int>> verticalTraversalMap(TreeNode *root)
    }
    return results;
 }
+//[leetcode 572](https://leetcode.com/problems/subtree-of-another-tree/description/) : Subtree of Another Tree
+bool isSameTree(TreeNode *root1, TreeNode *root2)
+{
+   if (root1 == nullptr && root2 == nullptr)
+      return true;
+   if (root1 == nullptr || root2 == nullptr)
+      return false;
+   if (root1->val == root2->val)
+   {
+      return (isSameTree(root1->left, root2->left) && isSameTree(root1->right, root2->right));
+   }
+   return false;
+}
+bool isSubtree(TreeNode *root, TreeNode *subRoot)
+{
+   if (subRoot == nullptr)
+      return true;
+   if (root == nullptr)
+      return false;
+   if (isSameTree(root, subRoot))
+   {
+      return true;
+   }
+   else
+   {
+      return (isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot));
+   }
+}
+
+//[leetcode 508](https://leetcode.com/problems/most-frequent-subtree-sum/description/) : Most Frequent Subtree Sum
+
+int treeSum(TreeNode *root, std::unordered_map<int, int> &sumMap)
+{
+   if (root == nullptr)
+      return 0;
+   int sum = root->val + treeSum(root->left, sumMap) + treeSum(root->right, sumMap);
+   sumMap[sum]++;
+   return sum;
+}
+
+std::vector<int> findFrequentTreeSum(TreeNode *root)
+{
+   std::unordered_map<int, int> sumMap;
+   treeSum(root, sumMap);
+   int maxFreq = INT_MIN;
+   for (const auto &[key, value] : sumMap)
+   {
+      if (value > maxFreq)
+         maxFreq = value;
+   }
+   std::vector<int> results;
+   for (const auto &[key, value] : sumMap)
+   {
+      if (value == maxFreq)
+         results.push_back(key);
+   }
+   return results;
+}
+// [leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/) : Kth Smallest Element in a BST
+void dfs_kth(TreeNode *root, int &kk, int &result)
+{
+   if (root == nullptr)
+      return;
+
+   dfs_kth(root->left, kk, result);
+   kk = kk - 1;
+   if (kk == 0)
+   {
+      result = root->val;
+      return;
+   }
+   dfs_kth(root->right, kk, result);
+}
+int kthSmallest(TreeNode *root, int k)
+{
+
+   int result;
+   dfs_kth(root, k, result);
+   return result;
+}
+
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -558,6 +639,22 @@ std::vector<std::vector<int>> verticalTraversalMap(TreeNode *root)
    auto rootVTrsl=buildUsingLevelOrder(vecVertTrvsl);
    std::cout<<verticalTraversalMap(rootVTrsl)<<std::endl;
 
+   std::vector<int> vecTree1{3,4,5,1,2};
+   std::vector<int> vecTree2{4,1,2};
+   auto r1 = buildUsingLevelOrder(vecTree1);
+   auto r2 = buildUsingLevelOrder(vecTree2);
+   printLevelOrder(r1);
+   printLevelOrder(r2);
+   std::cout << std::boolalpha;   
+   std::cout<<isSubtree(r1, r2)<<std::endl;
+
+   std::vector<int> vecFreqSum{5,2,-3};
+   auto rFreqSum = buildUsingLevelOrder(vecFreqSum);
+   std::cout<<findFrequentTreeSum(rFreqSum)<<std::endl;
+
+   std::vector<int> vecKth{3,1,4,INT_MAX,2};
+   auto rKth = buildUsingLevelOrder(vecKth);
+   std::cout<<"aa="<<kthSmallest(rKth, 1)<<std::endl;
 
  }
 

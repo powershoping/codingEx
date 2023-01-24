@@ -18,6 +18,9 @@ Coding Examples
        - [leetcode 437](https://leetcode.com/problems/path-sum-iii/description/) : Path Sum III
        - [leetcode 99](https://leetcode.com/problems/recover-binary-search-tree/description/) : correct a BST tree which has exactly two nodes swapped.
        - [leetcode 987 ](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/) : vertical traversal of a binary tree. std::map of std::map std::multiset; and std::vector of std::pair
+       - [leetcode 572](https://leetcode.com/problems/subtree-of-another-tree/description/) : Subtree of Another Tree
+       - [leetcode 508](https://leetcode.com/problems/most-frequent-subtree-sum/description/) : Most Frequent Subtree Sum
+       - [leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/) : Kth Smallest Element in a BST
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort

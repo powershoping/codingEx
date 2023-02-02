@@ -33,3 +33,4 @@ Coding Examples
     -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : Reverse the binary, e.g. 100110(38) ==> 011001(25)
 4. Heap: buidHeap, heapfyUp, isHeap [heap.cpp](https://github.com/powershoping/codingEx/blob/master/heap/src/heap.cpp)
 5. LinkedList : build and merge k lists [LinkedList.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/LinkedList.cpp)
+5. Data stream and arrays of data : [dataStream.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dataStream.cpp)

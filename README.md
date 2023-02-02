@@ -34,3 +34,5 @@ Coding Examples
 4. Heap: buidHeap, heapfyUp, isHeap [heap.cpp](https://github.com/powershoping/codingEx/blob/master/heap/src/heap.cpp)
 5. LinkedList : build and merge k lists [LinkedList.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/LinkedList.cpp)
 5. Data stream and arrays of data : [dataStream.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dataStream.cpp)
+    - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest Number form by an array of integers
+    - [leetcode 2165](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/) :  Smallest value of the rearranged number

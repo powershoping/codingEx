@@ -38,5 +38,5 @@ Coding Examples
     -  [leetcode 23](https://leetcode.com/problems/merge-k-sorted-lists/description/) : Merge k Sorted Lists (binary-tree 2-leaves merges)
 
 5. Data stream and arrays of data : [dataStream.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dataStream.cpp)
-    - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest Number form by an array of integers
+    - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest number formed by an array of integers
     - [leetcode 2165](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/) :  Smallest value of the rearranged number

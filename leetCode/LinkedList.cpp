@@ -17,13 +17,27 @@ void push(ListNode **head, int val )
    *head = newNode;
 }
 
+ListNode * build(std::vector<int> &&vec){
+   ListNode *head=nullptr;
+   for(const auto &ee : vec){
+      push(&head, ee);
+   }
+   return head;
+}
+ListNode * buildReverse(std::vector<int> &&vec){
+   ListNode *head=nullptr;
+   for(int ii=vec.size()-1; ii>=0; --ii){
+      push(&head, vec[ii]);
+   }
+   return head;
+}
 void print(ListNode *head){
 
-   ListNode *cur_node = head;
-   while(cur_node)
+   ListNode *cur = head;
+   while(cur)
    {
-      printf("%8d", cur_node->val);
-      cur_node = cur_node->next;
+      printf("%8d", cur->val);
+      cur = cur->next;
    }
    printf("\n");
 
@@ -124,6 +138,121 @@ ListNode *mergeKLists(std::vector<ListNode *> &lists)
    }
    return lists[0];
 }
+//[leetcode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/description/) :Reverse Nodes in k-Group in a linked list
+ListNode *reverseKGroup(ListNode *head, int k)
+{
+   {
+      if (!head || !head->next)
+         return head;
+      ListNode dummyNode;
+      ListNode *dummy = &dummyNode;
+      dummy->next = head;
+      int count = 2;
+      ListNode *LastTail = dummy;
+      ListNode *first = head;
+      ListNode *prev = first;
+      ListNode *cur = first->next;
+      first->next = nullptr;
+
+      ListNode *last = nullptr;
+      while (cur)
+      {
+         if (count % k == 0)
+         {
+
+            ListNode *tmp = cur->next;
+            cur->next = prev;
+            LastTail->next = cur;
+            LastTail = first;
+            if (!tmp)
+            {
+               last = nullptr;
+               count = 0;
+               break;
+            }
+            else
+            {
+               if (tmp->next)
+               {
+                  // for next loop
+                  cur = tmp->next;
+                  first = tmp;
+                  prev = first;
+                  first->next = nullptr;
+                  count = 2;
+               }
+               else
+               {
+                  last=tmp;
+                  last->next=nullptr;
+                  count = 1;
+                  break;
+               }
+            }
+         }
+         else
+         {
+            ListNode *tmp = cur->next;
+            cur->next = prev;
+            prev = cur;
+            last = cur;
+            cur = tmp;
+            count++;
+         }
+      }
+      if(count <=1){
+         LastTail->next = last;
+      }
+      else{
+         count =count - 3;
+         LastTail->next = first;
+         prev=last;
+         cur = last->next;
+         last->next = nullptr;
+         for(int ii =count; ii>=0; --ii){
+            ListNode *tmp = cur->next;
+            cur->next = prev;
+            prev=cur;
+            cur=tmp;
+         }
+      }
+
+      return dummy->next;
+   }
+}
+//[leetcode 61](https://leetcode.com/problems/rotate-list/description/) : rotate a linked list
+ListNode *rotateRight(ListNode *head, int k)
+{
+   if (!head || !head->next || k == 0)
+      return head;
+   int sz = 0;
+   ListNode dummyNode;
+   ListNode *dummy = &dummyNode;
+   ListNode *tail = nullptr;
+   dummy->next = head;
+   ListNode *cur = dummy->next;
+   while (cur)
+   {
+      sz++;
+      tail = cur;
+      cur = cur->next;
+   }
+   if (k % sz == 0)
+      return head;
+   int nrot = sz - k % sz - 1;
+   cur = dummy->next;
+   while (nrot > 0)
+   {
+      nrot--;
+      cur = cur->next;
+   }
+   ListNode *newhead = cur->next;
+   cur->next = nullptr;
+   tail->next = dummy->next;
+   dummy->next = newhead;
+
+   return dummy->next;
+}
 
 int main()
 {
@@ -140,10 +269,8 @@ int main()
   print(list2);
 
 
-  ListNode *merged_list=merge(list1, list2);
+  print(merge(list1, list2));
 
-  print(merged_list);
-  
 // list1 and list2 are interconnected; needs to create news ones.
   list1 =nullptr;
   push(&list1, 6);
@@ -180,7 +307,13 @@ int main()
   print(list5);
 
   std::vector<ListNode*> kLists{list1, list2, list3, list4, list5};
-  ListNode* merged_klists = mergeKLists(kLists);
-  print(merged_klists);
+  print(mergeKLists(kLists));
+
+  auto lkrvs = buildReverse({1,2,3,4,5,6,7});
+  print(reverseKGroup(lkrvs,4));
+
+  print(rotateRight(buildReverse({1,2,3, 4,5,6,7}),3));
+
+
   return 0;
 }

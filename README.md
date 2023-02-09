@@ -33,6 +33,10 @@ Coding Examples
     -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : Reverse the binary, e.g. 100110(38) ==> 011001(25)
 4. Heap: buidHeap, heapfyUp, isHeap [heap.cpp](https://github.com/powershoping/codingEx/blob/master/heap/src/heap.cpp)
 5. LinkedList : build and merge k lists [LinkedList.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/LinkedList.cpp)
+    -  [leetcode 61](https://leetcode.com/problems/rotate-list/description/) : rotate a linked list
+    -  [leetcode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/description/) :Reverse Nodes in k-Group in a linked list (O(n+2))
+    -  [leetcode 23] (https://leetcode.com/problems/merge-k-sorted-lists/description/) : Merge k Sorted Lists (binary-tree 2-leaves merges)
+
 5. Data stream and arrays of data : [dataStream.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dataStream.cpp)
     - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest Number form by an array of integers
     - [leetcode 2165](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/) :  Smallest value of the rearranged number

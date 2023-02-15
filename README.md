@@ -31,7 +31,10 @@ Coding Examples
     -  [leetcode 1470]( https://leetcode.com/problems/shuffle-the-array/description/ ) : Shuffle array A of length 2N so that A[i] and A[N+i] are neigbors
     -  [leetcode 7   ](https://leetcode.com/problems/reverse-integer/description/)  : Reverse the interger, e.g. 123==>321
     -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : Reverse the binary, e.g. 100110(38) ==> 011001(25)
+    -  [leetcode 137](https://leetcode.com/problems/single-number-ii/description/) : single number, a general code
+    -  [leetcode 38](https://leetcode.com/problems/counting-bits/description/) : Counting Bits. 0->0, 1->1; 2->10, 3->11; 4->100, 5->101, 6->110, 7->111;8->1000, 9->1001, 10->1010, 11->1011, 12->1100, 13->1101, 14->1110, 15->1111;... [0, 1; 1, 2; 1, 2, 2, 3; 1, 2, 2, 3, 2, 3, 3, 4, ....]
 4. Heap: buidHeap, heapfyUp, isHeap [heap.cpp](https://github.com/powershoping/codingEx/blob/master/heap/src/heap.cpp)
+
 5. LinkedList : build and merge k lists [LinkedList.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/LinkedList.cpp)
     -  [leetcode 61](https://leetcode.com/problems/rotate-list/description/) : Rotate a linked list
     -  [leetcode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/description/) :Reverse Nodes in k-Group in a linked list (O(n+2))

@@ -214,23 +214,151 @@ uint32_t reverseBitInt(uint32_t org_x){
 
    return rev_x;
 }
+
+int singleNumber32Counters(std::vector<int> &nums, int k)
+{
+   {
+      std::vector<int> counts(32, 0); 
+      for (auto &ee : nums)
+      {
+         for (int ii = 0; ii < 32; ++ii)
+         {
+            if (ee & 1)
+               counts[ii]++;
+            ee >>= 1;
+         }
+      }
+      int result = 0;
+      for (int ii = 0; ii < 32; ++ii)
+      {
+         if (counts[ii] % k != 0)
+         {
+            result = result | 1 << ii;
+         }
+      }
+      return result;
+   }
+}
+//[leetcode 137](https://leetcode.com/problems/single-number-ii/description/) : single number, a general code
+int singleNumber(std::vector<int> &nums, int kk){
+   {
+      int numCCs = 0;
+      int kk_saved = kk;
+      while (kk)
+      {
+         numCCs++;
+         kk >>= 1;
+      }
+      bool maskOn = kk == 1 << numCCs ? false : true;
+      std::vector<int> cc(numCCs, 0);
+      int mask = 0;
+
+      for (const auto &ee : nums)
+      {
+         for (int ii = numCCs - 1; ii >= 0; --ii)
+         {
+            int tmp = ee;
+            for (int jj = 0; jj < ii; ++jj)
+            {
+               tmp &= cc[jj];
+            }
+            cc[ii] ^= tmp;
+         }
+         if (maskOn)
+         {
+            int tmp = kk_saved;
+            if (tmp & 1)
+            {
+               mask &= cc[0];
+            }
+            else
+            {
+               mask &= ~cc[0];
+            }
+            tmp >>= 1;
+            for (int ii = 1; ii < numCCs; ++ii)
+            {
+               if (tmp & 1)
+               {
+                  mask &= cc[ii];
+               }
+               else
+               {
+                  mask &= ~cc[ii];
+               }
+               tmp >>= 1;
+            }
+            mask = ~mask;
+            for (int ii = 0; ii < numCCs; ++ii)
+            {
+               cc[ii] &= mask;
+            }
+         }
+      }
+      int result = cc[0];
+      for (int ii = 1; ii < numCCs; ++ii)
+      {
+         result |= cc[ii];
+      }
+      return result;
+   }
+}
+
+//[leetcode 260](https://leetcode.com/problems/single-number-iii/description/) : Single Number,  exactly two elements appear only once and all the other elements appear exactly twice
+
+//[leetcode 38](https://leetcode.com/problems/counting-bits/description/) : Counting Bits. 0->0, 1->1; 2->10, 3->11; 4->100, 5->101, 6->110, 7->111;
+// 8->1000, 9->1001, 10->1010, 11->1011, 12->1100, 13->1101, 14->1110, 15->1111;... [0, 1; 1, 2; 1, 2, 2, 3; 1, 2, 2, 3, 2, 3, 3, 4, ....]
+std::vector<int> countBits(int n)
+{
+   std::vector<int> counts(n + 1, 0);
+   counts[0] = 0;
+   if (n == 0)
+   {
+      return counts;
+   }
+   counts[1] = 1;
+   if (n == 1)
+      return counts;
+   int nc = 2;
+   int start = 2;
+   while (nc < n + 1)
+   {
+      for (int ii = start; ii < start << 1; ++ii)
+      {
+         counts[ii] = 1 + counts[ii - start];
+         nc++;
+         if (nc > n)
+            break;
+      }
+      start <<= 1;
+   }
+
+   return counts;
+}
 int main()
 {
-//
+   //
    std::cout << reverseInt(4) << std::endl;
    std::cout << reverseInt(-405) << std::endl;
    std::cout << reverseInt(1147483647) << std::endl;
-   std::cout << reverseBitInt(11) << std::endl;   //leetcode 190
+   std::cout << reverseBitInt(11) << std::endl; // leetcode 190
 
-   std::cout<<"Minimum bit flips is"<<minBitFlips(10,7)<<std::endl; //leetcode 2220.
+   std::cout << "Minimum bit flips is" << minBitFlips(10, 7) << std::endl; // leetcode 2220.
 
    std::vector<size_t> vec1{1, 2, 4, 6, 8, 11, 15, 14, 19, 20};
    std::cout << shuffle(vec1) << std::endl;
    std::cout << sum(12, 5) << std::endl;
    std::cout << divide(31, 2) << std::endl;
+
+   std::vector<int> vec11{1,1,1,2};
+   std::cout<<"bbb "<<singleNumber32Counters(vec11, 3)<<std::endl;
+
+   std::vector<int> vec12{30000,500,100,30000,100,30000,100};
+   std::cout<<"bbb "<<singleNumber(vec12, 3)<<std::endl;
+
    unsigned int aa = INT_MAX;
    unsigned int bb = INT_MIN;
-   std::cout<<aa<<"    "<<bb<<std::endl;
+   std::cout << aa << "    " << bb << std::endl;
    /*
       constexpr size_t SIZE=16;
       size_t bitMask = (1<<16) -1;
@@ -243,4 +371,4 @@ int main()
    //      vec1[2 * ii + 1] = secondNum;
       }
    */
-   }
+}

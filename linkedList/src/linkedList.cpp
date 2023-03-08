@@ -1,47 +1,6 @@
-#include<iostream>
-#include<vector>
 
-struct ListNode
-{
-   int val;
-   ListNode *next;
-   ListNode() : val(0), next(nullptr) {}
-   ListNode(int x) : val(x), next(nullptr) {}
-   ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+#include "linkedList.h"
 
-void push(ListNode **head, int val )
-{
-   ListNode *newNode = new ListNode(val);
-   newNode->next = *head;
-   *head = newNode;
-}
-
-ListNode * build(std::vector<int> &&vec){
-   ListNode *head=nullptr;
-   for(const auto &ee : vec){
-      push(&head, ee);
-   }
-   return head;
-}
-ListNode * buildReverse(std::vector<int> &&vec){
-   ListNode *head=nullptr;
-   for(int ii=vec.size()-1; ii>=0; --ii){
-      push(&head, vec[ii]);
-   }
-   return head;
-}
-void print(ListNode *head){
-
-   ListNode *cur = head;
-   while(cur)
-   {
-      printf("%8d", cur->val);
-      cur = cur->next;
-   }
-   printf("\n");
-
-}
 
 ListNode* merge(ListNode *list1, ListNode* list2 ){
    
@@ -116,7 +75,7 @@ ListNode* merge2Lists(ListNode *list1, ListNode *list2)
 
     return aa.next;
 }
-
+//[leetcode 23] (https://leetcode.com/problems/merge-k-sorted-lists/description/) : Merge k Sorted Lists (binary-tree 2-leaves merges)
 ListNode *mergeKLists(std::vector<ListNode *> &lists)
 {
    size_t interval = 1;
@@ -138,7 +97,7 @@ ListNode *mergeKLists(std::vector<ListNode *> &lists)
    }
    return lists[0];
 }
-//[leetcode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/description/) :Reverse Nodes in k-Group in a linked list
+//[leetcode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/description/) :Reverse Nodes in k-Group in a linked list (O(n+2))
 ListNode *reverseKGroup(ListNode *head, int k)
 {
    {
@@ -253,66 +212,76 @@ ListNode *rotateRight(ListNode *head, int k)
 
    return dummy->next;
 }
+//[leetcode 147](https://leetcode.com/problems/insertion-sort-list/description/) : Insertion Sort List
+ListNode *insertionSortList(ListNode *head)
+{
+   if (head == nullptr || head->next == nullptr)
+      return head;
+   ListNode dummy_node;
+   ListNode *dummy = &dummy_node;
+   dummy->next = head;
+   ListNode *prev = dummy->next;
+   ListNode *cur = prev->next;
+   while (cur)
+   {
+      if (cur->val < prev->val)
+      {
+         prev->next = cur->next;
+         cur->next = nullptr;
+         ListNode *cur2 = dummy->next;
+         ListNode *prev2 = dummy;
+         while (true)
+         {
+            if (cur->val <= cur2->val)
+            {
+               prev2->next = cur;
+               cur->next = cur2;
+               break;
+            }
+            prev2 = cur2;
+            cur2 = cur2->next;
+         }
+         cur = prev->next;
+      }
+      else
+      {
+         prev = cur;
+         cur = cur->next;
+      }
+   }
 
+   return dummy->next;
+}
 int main()
 {
-  ListNode *list1 =nullptr;
-  push(&list1, 6);
-  push(&list1, 3);
-  push(&list1, 1);
-  print(list1);
-
-  ListNode *list2 = nullptr;
-  push(&list2,5);
-  push(&list2,4);
-  push(&list2,2);
-  print(list2);
-
-
-  print(merge(list1, list2));
+  auto list1 = buildLinkedList({1,3,6});
+  auto list2 = buildLinkedList({2,4,5});
+  printLinkedList(list1);
+  printLinkedList(list2);
+  printLinkedList(merge(list1, list2));
 
 // list1 and list2 are interconnected; needs to create news ones.
-  list1 =nullptr;
-  push(&list1, 6);
-  push(&list1, 3);
-  push(&list1, 1);
-  print(list1);
+  list1 = buildLinkedList({1,3,6});
+  list2 = buildLinkedList({2,4,5});
+  auto list3 = buildLinkedList({1,6,9});
+  auto list4 = buildLinkedList({8,8,15,20});
+  auto list5 = buildLinkedList({4,4,15,20});
 
-  list2 = nullptr;
-  push(&list2,5);
-  push(&list2,4);
-  push(&list2,2);
-  print(list2);
-
-  ListNode *list3 = nullptr;
-  push(&list3,9);
-  push(&list3,6);
-  push(&list3,1);
-  print(list3);
-
-
-  ListNode *list4 = nullptr;
-  push(&list4,20);
-  push(&list4,15);
-  push(&list4,8);
-  push(&list4,8);
-  print(list4);
-
-
-  ListNode *list5 = nullptr;
-  push(&list5,20);
-  push(&list5,15);
-  push(&list5,4);
-  push(&list5,4);
-  print(list5);
+  printLinkedList(list1);
+  printLinkedList(list2);
+  printLinkedList(list3);
+  printLinkedList(list4);
+  printLinkedList(list5);
 
   std::vector<ListNode*> kLists{list1, list2, list3, list4, list5};
-  print(mergeKLists(kLists));
+  printLinkedList(mergeKLists(kLists));
 
-  auto lkrvs = buildReverse({1,2,3,4,5,6,7});
-  print(reverseKGroup(lkrvs,4));
+  auto lkrvs = buildLinkedList({1,2,3,4,5,6,7});
+  printLinkedList(reverseKGroup(lkrvs,4));
 
-  print(rotateRight(buildReverse({1,2,3, 4,5,6,7}),3));
+  printLinkedList(rotateRight(buildLinkedList({1,2,3, 4,5,6,7}),3));
+
+  printLinkedList(insertionSortList(buildLinkedList({4,2,1,3})));
 
 
   return 0;

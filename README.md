@@ -21,6 +21,8 @@ Coding Examples
        - [leetcode 572](https://leetcode.com/problems/subtree-of-another-tree/description/) : Subtree of Another Tree
        - [leetcode 508](https://leetcode.com/problems/most-frequent-subtree-sum/description/) : Most Frequent Subtree Sum
        - [leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/) : Kth Smallest Element in a BST
+       - [leetcode 129](https://leetcode.com/problems/sum-root-to-leaf-numbers/description/) : Sum Root to Leaf Numbers
+       - [leetcode 222](https://leetcode.com/problems/count-complete-tree-nodes/description/) : Count Complete Tree Nodes
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
@@ -39,6 +41,7 @@ Coding Examples
     -  [leetcode 61](https://leetcode.com/problems/rotate-list/description/) : Rotate a linked list
     -  [leetcode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/description/) :Reverse Nodes in k-Group in a linked list (O(n+2))
     -  [leetcode 23](https://leetcode.com/problems/merge-k-sorted-lists/description/) : Merge k Sorted Lists (binary-tree 2-leaves merges)
+    -  [leetcode 147](https://leetcode.com/problems/insertion-sort-list/description/) : Insertion Sort List
 
 5. Data stream and arrays of data : [dataStream.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dataStream.cpp)
     - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest number formed by an array of integers

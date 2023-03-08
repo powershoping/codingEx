@@ -305,7 +305,54 @@ int singleNumber(std::vector<int> &nums, int kk){
 }
 
 //[leetcode 260](https://leetcode.com/problems/single-number-iii/description/) : Single Number,  exactly two elements appear only once and all the other elements appear exactly twice
+std::vector<int> singleNumber(std::vector<int> &nums)
+{
+   int sz = nums.size();
+   if (sz == 2)
+      return nums;
+   std::vector<int> result;
+   int tmp = 0;
+   for (const auto &ee : nums)
+   {
+      tmp ^= ee;
+   }
+   int pos = 0;
+   while (true)
+   {
+      if (tmp & 1)
+         break;
+      tmp >>= 1;
+      pos++;
+   }
+   tmp = 1 << pos;
+   std::vector<int> nn1;
+   std::vector<int> nn2;
+   for (const auto &ee : nums)
+   {
+      if ((ee & tmp) != 0)
+      {
+         nn1.push_back(ee);
+      }
+      else
+      {
+         nn2.push_back(ee);
+      }
+   }
+   tmp = 0;
+   for (const auto &ee : nn1)
+   {
+      tmp ^= ee;
+   }
+   result.push_back(tmp);
+   tmp = 0;
+   for (const auto &ee : nn2)
+   {
+      tmp ^= ee;
+   }
+   result.push_back(tmp);
 
+   return result;
+}
 //[leetcode 38](https://leetcode.com/problems/counting-bits/description/) : Counting Bits. 0->0, 1->1; 2->10, 3->11; 4->100, 5->101, 6->110, 7->111;
 // 8->1000, 9->1001, 10->1010, 11->1011, 12->1100, 13->1101, 14->1110, 15->1111;... [0, 1; 1, 2; 1, 2, 2, 3; 1, 2, 2, 3, 2, 3, 3, 4, ....]
 std::vector<int> countBits(int n)
@@ -335,8 +382,105 @@ std::vector<int> countBits(int n)
 
    return counts;
 }
+//To add 1 to a number x (say 0011000111), flip all the bits after the rightmost 0 bit (we get 0011000000). Finally, 
+// flip the rightmost 0 bit also (we get 0011001000) to get the answer. 
+int addOne(int nn){
+   int ii = 1;
+   while(ii & nn){
+      nn   = ii ^ nn;
+      ii <<= 1;
+   }
+   return ii^nn;
+
+}
+//[leetcode 67](https://leetcode.com/problems/add-binary/description/) : add binary 
+std::string addBinary(std::string a, std::string b)
+{
+   int ii = a.size();
+   int jj = b.size();
+   std::string ans;
+   int carry = 0;
+   while (ii > 0 || jj > 0)
+   {
+      if (ii > 0)
+         carry += a[--ii] - '0';
+      if (jj > 0)
+         carry += b[--jj] - '0';
+      ans = (carry % 2) == 0 ? "0" + ans : "1" + ans;
+      carry = carry / 2;
+   }
+   if (carry == 1)
+      ans = "1" + ans;
+   return ans;
+}
+std::string addBinary(std::string a, std::string b)
+{
+   int asz = a.size();
+   int bsz = b.size();
+   if (asz == 0)
+      return b;
+   if (bsz == 0)
+      return a;
+   int sz = asz > bsz ? asz : bsz;
+   asz = asz - 1;
+   bsz = bsz - 1;
+   std::string ans;
+   char ac;
+   char bc;
+   char cc = '0';
+   for (int ii = 0; ii < sz; ++ii)
+   {
+      ac = '0';
+      if ((asz - ii) >= 0)
+         ac = a[asz - ii];
+      bc = '0';
+      if ((bsz - ii) >= 0)
+         bc = b[bsz - ii];
+      if (cc == '1')
+      {
+         if (ac == '1' && bc == '1')
+         {
+            ans = "1" + ans;
+            cc = '1';
+         }
+         else if (ac == '0' && bc == '0')
+         {
+            ans = "1" + ans;
+            cc = '0';
+         }
+         else
+         {
+            ans = "0" + ans;
+            cc = '1';
+         }
+      }
+      else
+      {
+         if (ac == '1' && bc == '1')
+         {
+            ans = "0" + ans;
+            cc = '1';
+         }
+         else if (ac == '0' && bc == '0')
+         {
+            ans = "0" + ans;
+            cc = '0';
+         }
+         else
+         {
+            ans = "1" + ans;
+            cc = '0';
+         }
+      }
+   }
+   if (cc == '1')
+      ans = "1" + ans;
+   return ans;
+}
+
 int main()
 {
+   std::cout<<"addOne: "<<addOne(13)<<std::endl;
    //
    std::cout << reverseInt(4) << std::endl;
    std::cout << reverseInt(-405) << std::endl;
@@ -359,6 +503,8 @@ int main()
    unsigned int aa = INT_MAX;
    unsigned int bb = INT_MIN;
    std::cout << aa << "    " << bb << std::endl;
+
+   std::cout<<addBinary("11","1")<<std::endl;
    /*
       constexpr size_t SIZE=16;
       size_t bitMask = (1<<16) -1;

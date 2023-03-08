@@ -1,5 +1,3 @@
-#include <iostream>
-#include <vector>
 #include <queue>
 #include <limits.h>
 #include <map>
@@ -9,95 +7,10 @@
 #include <algorithm>
 #include <iomanip>
 
-template<typename T>
-std::ostream &operator <<(std::ostream &out, const std::vector<T> vec){
-   int ii;
-   out<<"[";
-    for( ii =0; ii<vec.size()-1; ii++)
-       out << vec[ii] << ",  ";
-    out << vec[ii] << "]";
-    return out;
-}
+#include "binaryTree.h"
+#include "linkedList.h"
+#include "output_tools.h"
 
-template<typename T>
-std::ostream &operator <<(std::ostream &out, const std::vector<std::vector<T>> vec){
-    for( const auto &el : vec)
-       out << el << std::endl;
-
-    return out;
-}
-
-class TreeNode{
-   public: 
-      int val;
-      TreeNode* left;
-      TreeNode* right;
-   TreeNode():val(0), left(nullptr), right(nullptr){} 
-   TreeNode(int data): TreeNode(){val = data;}
-};
-
-
-TreeNode* buildUsingLevelOrder(std::vector<int> vecOrg){
-
-   if(vecOrg[0]==INT_MAX){
-      std::cout<<"Empty binary tree or invalid binary tree\n";
-      return nullptr;
-   }
-   TreeNode* root = new TreeNode(vecOrg[0]);
-   std::queue<TreeNode*> nodeQueue;
-   nodeQueue.push(root);
-
-   for(int ii=1; ii<vecOrg.size(); ii +=2){
-      auto curNode = nodeQueue.front();
-      nodeQueue.pop();
-      if(vecOrg[ii]==INT_MAX){
-         curNode->left=nullptr;
-      }
-      else{
-         TreeNode* newNode = new TreeNode(vecOrg[ii]);
-         nodeQueue.push(newNode);
-         curNode->left= newNode;
-      }
-
-
-      if(vecOrg[ii+1]==INT_MAX){
-         curNode->right=nullptr;
-      }
-      else{
-         TreeNode* newNode = new TreeNode(vecOrg[ii+1]);
-         nodeQueue.push(newNode);
-         curNode->right= newNode;
-      }
-   }
-   return root;
-}
-void printLevelOrder(TreeNode* root)
-{
-   if(root==nullptr)
-      std::cout << "null\n";
-
-   std::queue<TreeNode*> nodeQueue;
-   nodeQueue.push(root);
-   std::cout<<"[";
-   int count=0;
-   while(!nodeQueue.empty()){
-      auto curNode= nodeQueue.front();
-      nodeQueue.pop();
-      if(count>0)std::cout<<", ";
-      if(curNode){
-         std::cout << curNode->val;
-      }
-      else{
-         std::cout <<"null";
-         continue;
-      }
-
-      count++;
-      nodeQueue.push(curNode->left);
-      nodeQueue.push(curNode->right);
-   }
-   std::cout<<"]\n";
-}
 // [leetcode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/) : Binary Tree Zigzag Level Order Traversal
 std::vector<std::vector<int>> zigZagLevelTranversal(TreeNode* root)
 {
@@ -537,13 +450,13 @@ std::vector<int> findFrequentTreeSum(TreeNode *root)
    std::unordered_map<int, int> sumMap;
    treeSum(root, sumMap);
    int maxFreq = INT_MIN;
-   for (const auto &[key, value] : sumMap)
+   for (const auto & [key, value] : sumMap)
    {
       if (value > maxFreq)
          maxFreq = value;
    }
    std::vector<int> results;
-   for (const auto &[key, value] : sumMap)
+   for (const auto & [key, value] : sumMap)
    {
       if (value == maxFreq)
          results.push_back(key);
@@ -572,6 +485,116 @@ int kthSmallest(TreeNode *root, int k)
    dfs_kth(root, k, result);
    return result;
 }
+TreeNode *inorderSuccessorBST(TreeNode *root, int vv)
+{
+   if (root == nullptr || (root->left == nullptr && root->right == nullptr))
+      return nullptr;
+   TreeNode *succ = nullptr;
+   while (root != nullptr)
+   {
+      if (vv >= root->val)
+      {
+         root = root->right;
+      }
+      else
+      {
+         succ=root;
+         root = root->left;
+      }
+   }
+   return succ;
+}
+
+TreeNode *inorderPredecessorBST(TreeNode *root, int vv)
+{
+   if(root==nullptr || (root->right==nullptr && root->left==nullptr))
+      return nullptr;
+   TreeNode *pred = nullptr;
+   while(root!=nullptr){
+      if(vv > root->val){
+         pred = root;
+         root = root->right;
+      }
+      else{
+         root = root->left;
+      }
+   }
+   return pred;
+}
+
+TreeNode *inorderSuccessor(TreeNode* root, int &vv){
+   if(root==nullptr) return nullptr;
+   TreeNode *ll = nullptr;
+   TreeNode *rr = nullptr;
+   ll = inorderSuccessor(root->left, vv);
+   if(ll)return ll;
+   if(vv== INT_MAX) {
+      return root;
+   }
+   if(root->val == vv) vv = INT_MAX;
+   rr= inorderSuccessor(root->right, vv);
+   return rr;
+}
+//[leetcode 129](https://leetcode.com/problems/sum-root-to-leaf-numbers/description/) : Sum Root to Leaf Numbers
+void sumHelper(TreeNode *root, int &sum, std::string str)
+{
+   if (root == nullptr)
+      return;
+   str = str + std::to_string(root->val);
+   if (root->left == nullptr && root->right == nullptr)
+   {
+      sum = sum + std::stoi(str);
+   }
+   sumHelper(root->left, sum, str);
+   sumHelper(root->right, sum, str);
+}
+int sumNumbers(TreeNode *root)
+{
+   int sum = 0;
+   std::string str{};
+   sumHelper(root, sum, str);
+   return sum;
+}
+
+//[leetcode 222](https://leetcode.com/problems/count-complete-tree-nodes/description/) : Count Complete Tree Nodes
+int computeLH(TreeNode *root)
+{
+   int hh = 0;
+   root = root->left;
+   while (root)
+   {
+      root = root->left;
+      ++hh;
+   }
+   return hh;
+}
+int computeRH(TreeNode *root)
+{
+   int hh = 0;
+   root = root->right;
+   while (root)
+   {
+      root = root->right;
+      ++hh;
+   }
+   return hh;
+}
+int countNodesCompleteTree(TreeNode *root)
+{
+   if (root == nullptr)
+      return 0;
+   int lh = computeLH(root);
+   int rh = computeRH(root);
+   if (lh == rh)
+   {
+      return (1 << (lh + 1)) - 1;
+   }
+   else
+   {
+      return countNodesCompleteTree(root->left) + countNodesCompleteTree(root->right) + 1;
+   }
+
+}
 
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
@@ -581,81 +604,101 @@ int kthSmallest(TreeNode *root, int k)
  int main(){
 
    std::vector<int> vec00={5,4,8,11,INT_MAX,13,4,7,2,INT_MAX,INT_MAX,INT_MAX,1}; // level order
-   auto root00 = buildUsingLevelOrder(vec00);
-   printLevelOrder(root00);
+   auto root00 = buildBTUsingLevelOrder(vec00);
+   printBTLevelOrder(root00);
    std::cout<<zigZagLevelTranversal(root00)<<std::endl;
 
    int targetSum = 22;
    std::vector<int> vecOrg={5,4,8,11,INT_MAX,13,4,7,2,INT_MAX,INT_MAX,INT_MAX,1}; // level order
-   auto root = buildUsingLevelOrder(vecOrg);
-   printLevelOrder(root);
+   auto root = buildBTUsingLevelOrder(vecOrg);
+   printBTLevelOrder(root);
    std::cout<<hasPathSum(root, targetSum)<<std::endl;
 
    std::vector<int> vecPaths={5,4,8,11,INT_MAX,13,4,7,2,INT_MAX,INT_MAX,5,1};
-   auto root1 = buildUsingLevelOrder(vecPaths);
-   printLevelOrder(root1);
+   auto root1 = buildBTUsingLevelOrder(vecPaths);
+   printBTLevelOrder(root1);
    auto paths = pathSum(root1, targetSum);
    std::cout<<paths<<std::endl;
 
    std::cout<< pathSumByRef(root1, targetSum)<<std::endl;
 
    std::vector<int> vecDW = {8,5,-3,3,2,INT_MAX,11,8,-2,INT_MAX,1};
-   auto root2 = buildUsingLevelOrder(vecDW);
+   auto root2 = buildBTUsingLevelOrder(vecDW);
 
-   printLevelOrder(root2);
+   printBTLevelOrder(root2);
 
    std::cout<<numDownWardPathsSum(root2, 8)<<std::endl;
 
    std::cout<<maxPathSum(root2)<<std::endl;
    
    std::vector<int> vecLCA ={3,5,1,6,2,0,8,INT_MAX,INT_MAX,7,4};
-   auto rootLCA = buildUsingLevelOrder(vecLCA);
+   auto rootLCA = buildBTUsingLevelOrder(vecLCA);
    std::cout<<lowestCommonAncestor(rootLCA, 5, 1)->val<<std::endl;
 
    //std::vector<int> vecLUP{5, 4, 5, 1, 1, INT_MAX, 5};
    std::vector<int> vecLUP{1, 4, 5, 4, 4, INT_MAX, 5};
-   auto rootLUP = buildUsingLevelOrder(vecLUP);
+   auto rootLUP = buildBTUsingLevelOrder(vecLUP);
    std::cout<<lengthLongestUnivaluePath(rootLUP)<<std::endl;
 
    std::vector<int> vecCorrectBST{2,3,1};
-   auto rootCBST=buildUsingLevelOrder(vecCorrectBST);
-   printLevelOrder(rootCBST);
+   auto rootCBST=buildBTUsingLevelOrder(vecCorrectBST);
+   printBTLevelOrder(rootCBST);
    correctBST(rootCBST);
-   printLevelOrder(rootCBST);
+   printBTLevelOrder(rootCBST);
 
 
    std::vector<int> vecCorrectBST1{3,1, 2};
-   auto rootCBST1=buildUsingLevelOrder(vecCorrectBST1);
-   printLevelOrder(rootCBST1);
+   auto rootCBST1=buildBTUsingLevelOrder(vecCorrectBST1);
+   printBTLevelOrder(rootCBST1);
    correctBST(rootCBST1);
-   printLevelOrder(rootCBST1);
+   printBTLevelOrder(rootCBST1);
 
    std::vector<int> vecSumDeepestLeaves{1,2,3,4,5,INT_MAX,6,7,INT_MAX,INT_MAX,INT_MAX, INT_MAX,8};
-   auto rootSDL = buildUsingLevelOrder(vecSumDeepestLeaves);
+   auto rootSDL = buildBTUsingLevelOrder(vecSumDeepestLeaves);
    std::cout<<"deepestLeavesSumBFS= "<<deepestLeavesSumBFS(rootSDL)<<std::endl;
    std::cout<<"deepestLeavesSumDFS= "<<deepestLeavesSumDFS(rootSDL)<<std::endl;
+   std::cout<<"rootToLeafSum=       "<<sumNumbers(rootSDL)<<std::endl;
    
    std::vector<int> vecVertTrvsl{3,9,20,INT_MAX,INT_MAX,15,7};
-   auto rootVTrsl=buildUsingLevelOrder(vecVertTrvsl);
+   auto rootVTrsl=buildBTUsingLevelOrder(vecVertTrvsl);
    std::cout<<verticalTraversalMap(rootVTrsl)<<std::endl;
 
    std::vector<int> vecTree1{3,4,5,1,2};
    std::vector<int> vecTree2{4,1,2};
-   auto r1 = buildUsingLevelOrder(vecTree1);
-   auto r2 = buildUsingLevelOrder(vecTree2);
-   printLevelOrder(r1);
-   printLevelOrder(r2);
+   auto r1 = buildBTUsingLevelOrder(vecTree1);
+   auto r2 = buildBTUsingLevelOrder(vecTree2);
+   printBTLevelOrder(r1);
+   printBTLevelOrder(r2);
    std::cout << std::boolalpha;   
    std::cout<<isSubtree(r1, r2)<<std::endl;
 
    std::vector<int> vecFreqSum{5,2,-3};
-   auto rFreqSum = buildUsingLevelOrder(vecFreqSum);
+   auto rFreqSum = buildBTUsingLevelOrder(vecFreqSum);
    std::cout<<findFrequentTreeSum(rFreqSum)<<std::endl;
 
    std::vector<int> vecKth{3,1,4,INT_MAX,2};
-   auto rKth = buildUsingLevelOrder(vecKth);
+   auto rKth = buildBTUsingLevelOrder(vecKth);
    std::cout<<"aa="<<kthSmallest(rKth, 1)<<std::endl;
 
+   std::vector<int> vecSucc{20,8,22,4,12, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 10, 14};
+   auto rSucc = buildBTUsingLevelOrder(vecSucc);
+   printBTLevelOrder(rSucc);
+   int curInt = 14;
+   auto nd11 = inorderSuccessorBST(rSucc,curInt );
+   if(nd11) std::cout<<curInt<<" BST successor is "<<nd11->val<<std::endl;
+
+   nd11 = inorderPredecessorBST(rSucc,14 );
+   if(nd11) std::cout<<curInt<<" BST predecessor is "<<nd11->val<<std::endl;
+
+   curInt = 14;
+   nd11 = inorderSuccessor(rSucc,curInt );
+   if(nd11) std::cout<<curInt<<"  successor is "<<nd11->val<<std::endl;
+
+   std::vector<int>vecCpltTree{1,2,3,4,5,6, INT_MAX};
+   std::cout<<"Number of Nodes of the Complete tree is: "<<countNodesCompleteTree(buildBTUsingLevelOrder(vecCpltTree))<<std::endl;
+//   nd11 = inorderPredecessorBST(rSucc,14 );
+//   if(nd11) std::cout<<curInt<<"  predecessor is "<<nd11->val<<std::endl;
+    
  }
 
 

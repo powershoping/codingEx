@@ -13,6 +13,7 @@ class TreeNode{
 
 
 TreeNode* buildBTUsingLevelOrder(const std::vector<int> &vecOrg);
+TreeNode* buildBTUsingLevelOrder(const std::vector<int> &&vecOrg);
 
 void printBTLevelOrder(TreeNode* root);
 

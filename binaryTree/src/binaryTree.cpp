@@ -596,6 +596,165 @@ int countNodesCompleteTree(TreeNode *root)
 
 }
 
+//[leetcode 109](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/) : Convert Sorted List to Binary Search Tree
+ListNode *findPrevMid(ListNode *head)
+{
+   if (!head || !(head->next))
+   {  
+      return head;
+   }
+   ListNode *slow = head;
+   ListNode *prev = slow;
+   ListNode *fast = slow->next->next;
+   while (fast)
+   {
+      prev = slow;
+      slow = slow->next;
+      if (fast->next)
+      {
+         fast = fast->next->next;
+      }
+      else
+      {
+         break;
+      }
+   }
+
+   return prev;
+}
+TreeNode *sortedListToBST11(ListNode *head)
+{
+   if (head == nullptr)
+      return nullptr;
+   ListNode *prevMid = findPrevMid(head);
+   if(prevMid == nullptr ) return nullptr;
+   TreeNode *root  = nullptr;
+   ListNode *rHead = nullptr;
+   if(prevMid->next==nullptr){
+      root = new TreeNode(prevMid->val);
+      return root;
+   }
+
+   if(prevMid->next->next ==nullptr){
+      root = new TreeNode(prevMid->val);
+      head = nullptr;
+      rHead = prevMid->next;
+   }
+   else{
+      root = new TreeNode(prevMid->next->val);
+      rHead = prevMid->next->next;
+      prevMid->next->next=nullptr;
+      prevMid->next =nullptr;
+   }
+
+   root->left  = sortedListToBST11(head);
+   root->right = sortedListToBST11(rHead);
+   return root;
+}
+TreeNode *sortedListToBST(ListNode *head)
+{
+   if (head == nullptr)
+      return nullptr;
+   ListNode *slow = head, *fast = head, *prev = nullptr;
+   while (fast && fast->next)
+   {
+      prev = slow;
+      slow = slow->next;
+      fast = fast->next->next;
+   }
+   ListNode *rhead = slow->next;
+   slow->next = nullptr;
+   if (prev)
+      prev->next = nullptr;
+   if (slow == head)
+      head = nullptr;
+   TreeNode *root = new TreeNode(slow->val);
+   root->left = sortedListToBST(head);
+   root->right = sortedListToBST(rhead);
+   return root;
+}
+//[leetcode 108](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/) : Convert Sorted Array to Binary Search Tree
+TreeNode *sortedArrayToBST(std::vector<int> &nums, int ll, int rr)
+{
+   if (ll > rr)
+      return nullptr;
+   if (ll == rr)
+      return (new TreeNode(nums[ll]));
+   int mid = (ll + rr+1) / 2;
+   TreeNode *root = new TreeNode(nums[mid]);
+   root->left = sortedArrayToBST(nums, ll, mid - 1);
+   root->right = sortedArrayToBST(nums, mid + 1, rr);
+
+   return root;
+}
+//[leetcode 2196](https://leetcode.com/problems/create-binary-tree-from-descriptions/description/) : Create Binary Tree From Descriptions 
+TreeNode *createBinaryTreeFromDescription(std::vector<std::vector<int>> &&descriptions)
+{
+   std::unordered_map<int, std::pair<TreeNode *, bool>> umap; // bool == true mean child.
+
+   for (const auto &ee : descriptions)
+   {
+      TreeNode *par = nullptr;
+      TreeNode *chi = nullptr;
+      auto itPar = umap.find(ee[0]);
+      if (itPar == umap.end())
+      {
+         par = new TreeNode(ee[0]);
+         umap[ee[0]] = {par, false};
+      }
+      else
+      {
+         par = umap[ee[0]].first;
+      }
+
+      auto itChi = umap.find(ee[1]);
+      if (itChi == umap.end())
+      {
+         chi = new TreeNode(ee[1]);
+         umap[ee[1]] = {chi, true};
+      }
+      else
+      {
+         chi = umap[ee[1]].first;
+         umap[ee[1]].second = true;
+      }
+      if (ee[2] == 1)
+      {
+         par->left = chi;
+      }
+      else
+      {
+         par->right = chi;
+      }
+   }
+   for (const auto &ee : umap)
+   {
+      if (!ee.second.second)
+      {
+         return ee.second.first;
+      }
+   }
+   return nullptr;
+}
+//[leetcode 199](https://leetcode.com/problems/binary-tree-right-side-view/description/) : binary tree right side view.
+void rightSideView(TreeNode *root, std::vector<int> &ans, int hh)
+{
+   if (root == nullptr)
+      return;
+
+   hh++;
+   if (ans.size() < hh)
+      ans.push_back(root->val);
+   rightSideView(root->right, ans, hh);
+   rightSideView(root->left, ans, hh);
+}
+std::vector<int> rightSideView(TreeNode *root)
+{
+   std::vector<int> ans;
+   int hh = 0;
+   rightSideView(root, ans, hh);
+   return ans;
+}
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -696,6 +855,19 @@ int countNodesCompleteTree(TreeNode *root)
 
    std::vector<int>vecCpltTree{1,2,3,4,5,6, INT_MAX};
    std::cout<<"Number of Nodes of the Complete tree is: "<<countNodesCompleteTree(buildBTUsingLevelOrder(vecCpltTree))<<std::endl;
+   
+   ListNode* head1 = buildLinkedList({-10,-3,0,5,9});
+   printLinkedList(head1);
+   printBTLevelOrder(sortedListToBST(head1));
+
+   std::vector<int> vec2BST{-10,-3,0,5,9};
+   printBTLevelOrder(sortedArrayToBST(vec2BST, 0, vec2BST.size()-1));
+
+
+   printBTLevelOrder(createBinaryTreeFromDescription({{20,15,1},{20,17,0},{50,20,1},{50,80,0},{80,19,1}}));
+   auto rRSW = buildBTUsingLevelOrder({1,2,3,INT_MAX,5,INT_MAX,4});
+   std::cout<<rightSideView(rRSW)<<std::endl;
+ 
 //   nd11 = inorderPredecessorBST(rSucc,14 );
 //   if(nd11) std::cout<<curInt<<"  predecessor is "<<nd11->val<<std::endl;
     

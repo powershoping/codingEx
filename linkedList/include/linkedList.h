@@ -13,6 +13,7 @@ struct ListNode
 };
 
 ListNode *buildLinkedList(std::vector<int> &&vec);
+ListNode *findMidLinkedList(ListNode *head);
 void printLinkedList(ListNode *head);
 
 #endif

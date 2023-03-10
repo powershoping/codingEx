@@ -23,6 +23,10 @@ Coding Examples
        - [leetcode 230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/) : Kth Smallest Element in a BST
        - [leetcode 129](https://leetcode.com/problems/sum-root-to-leaf-numbers/description/) : Sum Root to Leaf Numbers
        - [leetcode 222](https://leetcode.com/problems/count-complete-tree-nodes/description/) : Count Complete Tree Nodes
+       - [leetcode 108](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/) : Convert Sorted Array to Binary Search Tree
+       - [leetcode 109](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/) : Convert Sorted List to Binary Search Tree
+       - [leetcode 2196](https://leetcode.com/problems/create-binary-tree-from-descriptions/description/) : Create Binary Tree From Descriptions 
+       - [leetcode 199](https://leetcode.com/problems/binary-tree-right-side-view/description/) : binary tree right side view
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort

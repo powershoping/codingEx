@@ -18,6 +18,19 @@ ListNode *buildLinkedList(std::vector<int> &&vec)
    return head;
 }
 
+ListNode *findMidLinkedList(ListNode *head)
+{
+   if(head == nullptr || head->next == nullptr) return head;
+   ListNode *slow=head;
+   ListNode *fast=head->next->next;
+   while(fast)
+   {
+      slow = slow->next;
+      fast = fast->next->next;
+   }
+   return slow;
+}
+
 void printLinkedList(ListNode *head)
 {
    ListNode *cur = head;

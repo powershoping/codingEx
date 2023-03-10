@@ -4,6 +4,10 @@
 
 #include "binaryTree.h"
 
+TreeNode *buildBTUsingLevelOrder(const std::vector<int> &&vecOrg)
+{
+   return buildBTUsingLevelOrder(vecOrg);
+}
 TreeNode *buildBTUsingLevelOrder(const std::vector<int> &vecOrg)
 {
 

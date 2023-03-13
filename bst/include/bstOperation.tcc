@@ -25,6 +25,66 @@ BST<T>* BST<T>::search(BST<T>* node, T dd)
 }
 
 template<typename T>
+BST<T>* BST<T>::search(BST<T>* node, T dd, BST<T>* &par)
+{
+   if(!node || node->data == dd ){
+      return node;
+   }
+
+   par = node;
+   if(dd < node->data){
+      return search(node->left, dd, par);
+   }
+   else{
+      return search(node->right, dd, par);
+   }
+
+}
+
+template<typename T>
+BST<T>* BST<T>::deleteNode(BST<T>* root, T dd)
+{
+   if(root == nullptr)return root;
+   BST<T> *par=root;
+   BST<T> *node = search(root, dd, par);
+   if(node == par) {
+      delete root;
+      root = nullptr;
+      return nullptr;
+   }
+   if(node->left){
+      auto prev = node;
+      auto cur = node->left;
+      while(cur->right){
+         prev=cur;
+         cur=cur->right;
+      }
+      node->data=cur->data;
+      if(prev == node)
+      {
+         prev->left = cur->left;
+      }
+      else{
+         prev->right = cur->left;
+      }
+      delete cur;
+      cur = nullptr;
+   }
+   else
+   {
+      if(par->right &&par->right->data == node->data ){
+         par->right=nullptr;
+      }
+      else
+      {
+         par->left =nullptr;
+      }
+      delete node;
+   }
+
+   return root;
+}
+template<typename T>
 int BST<T>::computeHeight(BST<T>* node)  
 {
    if(!node){

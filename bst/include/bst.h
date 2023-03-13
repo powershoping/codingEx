@@ -96,6 +96,7 @@ class BST
    search the tree with root=node for data=dd
 */
       BST<T> *search(BST<T> *node, T dd);
+      BST<T> *search(BST<T> *node, T dd, BST<T>* &par);
 
       BST<T>* deleteNode(BST<T>* node, T dd);
 

@@ -104,4 +104,10 @@ int main()
    std::cout<<bst_head.search(root, 2)<<std::endl;
    std::cout<<bst_head.search(root, 123)<<std::endl;
 
+   BST<int>  bst_head11;//empty object, used to as a handle to access the BST methods.
+   auto root11 = bst_head11.buildTreeUsingPreInOrders(vec_pre, vec_in);
+   bst_head11.deleteNode(root11,10);
+   bst_head11.computeHeight(root11);
+   bst_head11.printLevelOrder(root11);
+
 }

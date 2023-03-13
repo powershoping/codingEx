@@ -252,6 +252,45 @@ ListNode *insertionSortList(ListNode *head)
 
    return dummy->next;
 }
+//[leetcode 143](https://leetcode.com/problems/reorder-list/description/) : reorder the linked list
+ListNode *reorderList(ListNode *head)
+{
+   if (head == nullptr || head->next == nullptr || head->next->next == nullptr)
+      return head;
+   ListNode *slow = head;
+   ListNode *fast = head;
+   while (fast && fast->next)
+   {
+      slow = slow->next;
+      fast = fast->next->next;
+   }
+   // reverse the right half of the linkedList
+   ListNode *pre = slow->next;
+   ListNode *cur = pre->next;
+   slow->next = nullptr;
+   pre->next = nullptr;
+   while (cur)
+   {
+      ListNode *sv = cur->next;
+      cur->next = pre;
+      pre = cur;
+      cur = sv;
+   }
+   ListNode *rhead = pre;
+   cur = head;
+   auto rcur = rhead;
+   while (cur && rcur)
+   {
+      ListNode *sv = cur->next;
+      ListNode *rsv = rcur->next;
+      cur->next = rcur;
+      rcur->next = sv;
+      cur = sv;
+      rcur = rsv;
+   }
+   return head;
+}
+
 int main()
 {
   auto list1 = buildLinkedList({1,3,6});
@@ -282,7 +321,7 @@ int main()
   printLinkedList(rotateRight(buildLinkedList({1,2,3, 4,5,6,7}),3));
 
   printLinkedList(insertionSortList(buildLinkedList({4,2,1,3})));
-
+  printLinkedList(reorderList(buildLinkedList({1,2,3,4,5})));
 
   return 0;
 }

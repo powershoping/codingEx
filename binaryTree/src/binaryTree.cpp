@@ -755,6 +755,96 @@ std::vector<int> rightSideView(TreeNode *root)
    rightSideView(root, ans, hh);
    return ans;
 }
+// find node in a BST tree. 
+
+TreeNode *findNode(TreeNode *root, int key, TreeNode *&par)
+{
+   if (root == nullptr)
+      return nullptr;
+   if (root->val == key)
+   {
+      return root;
+   }
+   par = root;
+   if (key < root->val)
+   {
+      return findNode(root->left, key, par);
+   }
+   else
+   {
+      return findNode(root->right, key, par);
+   }
+}
+// can be used to delete node in binary tree and maintain inorder tranversal. 
+TreeNode *deleteNode(TreeNode *root, int key)
+{
+   if (root == nullptr)
+      return root;
+   TreeNode *par = root;
+   TreeNode *node = findNode(root, key, par);
+   if (node == nullptr)
+      return root;
+   if (node == par && !par->left && !par->right)
+   {
+      return nullptr;
+   }
+
+   if (node->left)
+   {
+      auto prev = node;
+      auto cur = node->left;
+      while (cur->right)
+      {
+         prev = cur;
+         cur = cur->right;
+      }
+      node->val = cur->val;
+      if (prev == node)
+      {
+         prev->left = cur->left;
+      }
+      else
+      {
+         prev->right = cur->left;
+      }
+      delete cur;
+   }
+   else if (node->right)
+   {
+      auto prev = node;
+      auto cur = node->right;
+      while (cur->left)
+      {
+         prev = cur;
+         cur = cur->left;
+      }
+      node->val = cur->val;
+      if (prev == node)
+      {
+         prev->right = cur->right;
+      }
+      else
+      {
+         prev->left = cur->right;
+      }
+      delete cur;
+   }
+   else
+   {
+      if (par->right && par->right->val == node->val)
+      {
+         par->right = nullptr;
+      }
+      else
+      {
+         par->left = nullptr;
+      }
+      delete node;
+   }
+
+   return root;
+}
+
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -867,7 +957,13 @@ std::vector<int> rightSideView(TreeNode *root)
    printBTLevelOrder(createBinaryTreeFromDescription({{20,15,1},{20,17,0},{50,20,1},{50,80,0},{80,19,1}}));
    auto rRSW = buildBTUsingLevelOrder({1,2,3,INT_MAX,5,INT_MAX,4});
    std::cout<<rightSideView(rRSW)<<std::endl;
- 
+   
+   std::vector<int> vecAA{20,8,22,4,12, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 10, 14};
+   auto rAA = buildBTUsingLevelOrder(vecAA);
+   printBTLevelOrder(deleteNode(rAA, 4));
+
+   auto rAA2 = buildBTUsingLevelOrder(vecAA);
+   printBTLevelOrder(deleteNode(rAA2, 22));
 //   nd11 = inorderPredecessorBST(rSucc,14 );
 //   if(nd11) std::cout<<curInt<<"  predecessor is "<<nd11->val<<std::endl;
     

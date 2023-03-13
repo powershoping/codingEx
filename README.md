@@ -27,6 +27,7 @@ Coding Examples
        - [leetcode 109](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/) : Convert Sorted List to Binary Search Tree
        - [leetcode 2196](https://leetcode.com/problems/create-binary-tree-from-descriptions/description/) : Create Binary Tree From Descriptions 
        - [leetcode 199](https://leetcode.com/problems/binary-tree-right-side-view/description/) : binary tree right side view
+       - [leetcode 450](https://leetcode.com/problems/delete-node-in-a-bst/description/) : delete a node in a binary search tree
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
@@ -50,3 +51,4 @@ Coding Examples
 5. Data stream and arrays of data : [dataStream.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dataStream.cpp)
     - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest number formed by an array of integers
     - [leetcode 2165](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/) :  Smallest value of the rearranged number
+    - [leetcode 143](https://leetcode.com/problems/reorder-list/description/) : reorder the linked list

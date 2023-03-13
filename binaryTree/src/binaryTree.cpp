@@ -775,6 +775,7 @@ TreeNode *findNode(TreeNode *root, int key, TreeNode *&par)
       return findNode(root->right, key, par);
    }
 }
+//[leetcode 450](https://leetcode.com/problems/delete-node-in-a-bst/description/) : delete a node in a binary search tree
 // can be used to delete node in binary tree and maintain inorder tranversal. 
 TreeNode *deleteNode(TreeNode *root, int key)
 {

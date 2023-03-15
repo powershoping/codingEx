@@ -506,6 +506,61 @@ long long smallestNumber1(long long num)
    result = sign * result;
    return result;
 }
+
+//[leetcode 904](https://leetcode.com/problems/fruit-into-baskets/description/) : Fruit Into Baskets
+int totalFruit(std::vector<int> &&fruits)
+{
+   std::unordered_map<int, int> umap;
+   int maxf = 0, count = 0;
+   int lp = 0, rp = 0;
+   while (rp < fruits.size())
+   {
+      if (umap.size() != 3)
+      {
+         umap[fruits[rp]]++;
+         rp++;
+         count++;
+      }
+      if (umap.size() == 3)
+      {
+         maxf = std::max(maxf, count - 1);
+      }
+      while (umap.size() == 3)
+      {
+         umap[fruits[lp]]--;
+         count--;
+         if (umap[fruits[lp]] == 0)
+         {
+            umap.erase(fruits[lp]);
+         }
+         lp++;
+      }
+   }
+   maxf = std::max(maxf, count);
+   return maxf;
+}
+//[leetcode 287](https://leetcode.com/problems/find-the-duplicate-number/description/) : Find the duplicated number in an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive.
+int findDuplicate(std::vector<int> &&nums)
+{
+   int slow = 0, fast = 0;
+
+   while (true)
+   {
+      slow = nums[slow];
+      fast = nums[nums[fast]];
+      if (slow == fast)
+         break;
+   }
+   slow = 0;
+   while (true)
+   {
+      slow = nums[slow];
+      fast = nums[fast];
+      if (fast == slow)
+         break;
+   }
+   return slow;
+}
 int main()
 {
     MedianFinder *obj = new MedianFinder();
@@ -544,6 +599,8 @@ int main()
     std::cout<<smallestNumber1(310)<<std::endl;
     std::cout<<smallestNumber(-1740)<<std::endl;
 
+    std::cout<<"Total Fruits= "<<totalFruit({1,2,1})<<std::endl;
+    std::cout<<"Duplicate integer is: "<<findDuplicate({1,3,4,2,5,2})<<std::endl;
 
 
 }

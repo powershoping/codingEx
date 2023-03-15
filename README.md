@@ -52,3 +52,5 @@ Coding Examples
     - [leetcode 179](https://leetcode.com/problems/largest-number/description/) : Largest number formed by an array of integers
     - [leetcode 2165](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/) :  Smallest value of the rearranged number
     - [leetcode 143](https://leetcode.com/problems/reorder-list/description/) : reorder the linked list
+    - [leetcode 904](https://leetcode.com/problems/fruit-into-baskets/description/) : Fruit Into Baskets
+    - [leetcode 287](https://leetcode.com/problems/find-the-duplicate-number/description/) : Find the duplicated number in an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive.

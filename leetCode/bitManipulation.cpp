@@ -413,7 +413,7 @@ std::string addBinary(std::string a, std::string b)
       ans = "1" + ans;
    return ans;
 }
-std::string addBinary(std::string a, std::string b)
+std::string addBinary11(std::string a, std::string b)
 {
    int asz = a.size();
    int bsz = b.size();
@@ -478,9 +478,34 @@ std::string addBinary(std::string a, std::string b)
    return ans;
 }
 
+//[leetcode 202](https://leetcode.com/problems/happy-number/) : happy number using slow and fast pointers method
+int nextNumber(int n)
+{
+   int res = 0;
+   while (n)
+   {
+      int digit = n % 10;
+      n = n / 10;
+      res += digit * digit;
+   }
+   return res;
+}
+bool isHappy(int n)
+{
+   int slow = n;
+   int fast = n;
+   while (slow != 1)
+   {
+      slow = nextNumber(slow);
+      fast = nextNumber(nextNumber(fast));
+      if (slow != 1 && slow == fast)
+         return false;
+   }
+   return true;
+}
 int main()
 {
-   std::cout<<"addOne: "<<addOne(13)<<std::endl;
+   std::cout << "addOne: " << addOne(13) << std::endl;
    //
    std::cout << reverseInt(4) << std::endl;
    std::cout << reverseInt(-405) << std::endl;
@@ -494,10 +519,10 @@ int main()
    std::cout << sum(12, 5) << std::endl;
    std::cout << divide(31, 2) << std::endl;
 
-   std::vector<int> vec11{1,1,1,2};
-   std::cout<<"bbb "<<singleNumber32Counters(vec11, 3)<<std::endl;
+   std::vector<int> vec11{1, 1, 1, 2};
+   std::cout << "bbb " << singleNumber32Counters(vec11, 3) << std::endl;
 
-   std::vector<int> vec12{30000,500,100,30000,100,30000,100};
+   std::vector<int> vec12{30000, 500, 100, 30000, 100, 30000, 100};
    std::cout<<"bbb "<<singleNumber(vec12, 3)<<std::endl;
 
    unsigned int aa = INT_MAX;
@@ -505,6 +530,7 @@ int main()
    std::cout << aa << "    " << bb << std::endl;
 
    std::cout<<addBinary("11","1")<<std::endl;
+   std::cout<<"Happy Number?   " <<isHappy(18)<<std::endl;
    /*
       constexpr size_t SIZE=16;
       size_t bitMask = (1<<16) -1;

@@ -11,6 +11,44 @@ class TreeNode{
       TreeNode(int data): TreeNode(){val = data;}
 };
 
+class BTIterator{
+   private:
+      std::stack<TreeNode *> stk;
+      void pushToStack(TreeNode *root)
+      {
+         while (root)
+         {
+            stk.push(root);
+            root = root->left;
+         }
+      }
+
+   public:
+      BSTIterator(TreeNode *root)
+      {
+         pushToStack(root);
+      }
+
+      int next()
+      {
+         auto res = stk.top();
+         if (res == nullptr)
+            return -1;
+         stk.pop();
+         if (res->right)
+         {
+            stk.push(res->right);
+            pushToStack(res->right->left);
+         }
+
+         return res->val;
+      }
+
+      bool hasNext()
+      {
+         return !stk.empty();
+      }
+};
 
 TreeNode* buildBTUsingLevelOrder(const std::vector<int> &vecOrg);
 TreeNode* buildBTUsingLevelOrder(const std::vector<int> &&vecOrg);

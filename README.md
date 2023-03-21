@@ -40,6 +40,7 @@ Coding Examples
     -  [leetcode 190 ](https://leetcode.com/problems/reverse-bits/description)  : Reverse the binary, e.g. 100110(38) ==> 011001(25)
     -  [leetcode 137](https://leetcode.com/problems/single-number-ii/description/) : single number, a general code
     -  [leetcode 38](https://leetcode.com/problems/counting-bits/description/) : Counting Bits. 0->0, 1->1; 2->10, 3->11; 4->100, 5->101, 6->110, 7->111;8->1000, 9->1001, 10->1010, 11->1011, 12->1100, 13->1101, 14->1110, 15->1111;... [0, 1; 1, 2; 1, 2, 2, 3; 1, 2, 2, 3, 2, 3, 3, 4, ....]
+    -  [leetcode 202](https://leetcode.com/problems/happy-number/) : happy number using slow and fast pointers method
 4. Heap: buidHeap, heapfyUp, isHeap [heap.cpp](https://github.com/powershoping/codingEx/blob/master/heap/src/heap.cpp)
 
 5. LinkedList : build and merge k lists [LinkedList.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/LinkedList.cpp)
@@ -56,3 +57,6 @@ Coding Examples
     - [leetcode 287](https://leetcode.com/problems/find-the-duplicate-number/description/) : Find the duplicated number in an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive.
 6. Graph  : [graph.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/graph.cpp)
     - [leetcode 994](https://leetcode.com/problems/rotting-oranges/description) : Time for Oranges to get rotten
+
+7. Numbers : [numbers.cpp]()
+    - [leetcode 96](https://leetcode.com/problems/unique-binary-search-trees/description/) : Unique Binary Search Trees. Catalan Number

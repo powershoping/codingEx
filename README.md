@@ -58,5 +58,5 @@ Coding Examples
 6. Graph  : [graph.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/graph.cpp)
     - [leetcode 994](https://leetcode.com/problems/rotting-oranges/description) : Time for Oranges to get rotten
 
-7. Numbers : [numbers.cpp]()
+7. Numbers : [numbers.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/numbers.cpp) : Catalan Number, Fibonacci sequence
     - [leetcode 96](https://leetcode.com/problems/unique-binary-search-trees/description/) : Unique Binary Search Trees. Catalan Number

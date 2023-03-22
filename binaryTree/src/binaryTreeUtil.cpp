@@ -51,22 +51,29 @@ TreeNode *buildBTUsingLevelOrder(const std::vector<int> &vecOrg)
 
 void printBTLevelOrder(TreeNode* root)
 {
-   if(root==nullptr)
+   if (root == nullptr)
+   {
       std::cout << "null\n";
+      return;
+   }
 
-   std::queue<TreeNode*> nodeQueue;
+   std::queue<TreeNode *> nodeQueue;
    nodeQueue.push(root);
-   std::cout<<"[";
-   int count=0;
-   while(!nodeQueue.empty()){
-      auto curNode= nodeQueue.front();
+   std::cout << "[";
+   int count = 0;
+   while (!nodeQueue.empty())
+   {
+      auto curNode = nodeQueue.front();
       nodeQueue.pop();
-      if(count>0)std::cout<<", ";
-      if(curNode){
+      if (count > 0)
+         std::cout << ", ";
+      if (curNode)
+      {
          std::cout << curNode->val;
       }
-      else{
-         std::cout <<"null";
+      else
+      {
+         std::cout << "null";
          continue;
       }
 
@@ -74,7 +81,5 @@ void printBTLevelOrder(TreeNode* root)
       nodeQueue.push(curNode->left);
       nodeQueue.push(curNode->right);
    }
-   std::cout<<"]\n";
+   std::cout << "]\n";
 }
-
-

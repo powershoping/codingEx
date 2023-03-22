@@ -28,6 +28,7 @@ Coding Examples
        - [leetcode 2196](https://leetcode.com/problems/create-binary-tree-from-descriptions/description/) : Create Binary Tree From Descriptions 
        - [leetcode 199](https://leetcode.com/problems/binary-tree-right-side-view/description/) : binary tree right side view
        - [leetcode 450](https://leetcode.com/problems/delete-node-in-a-bst/description/) : delete a node in a binary search tree
+       - [leetcode 1325](https://leetcode.com/problems/delete-leaves-with-a-given-value/description/) : Delete Leaves With a Given Value
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort

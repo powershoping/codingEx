@@ -846,6 +846,64 @@ TreeNode *deleteNode(TreeNode *root, int key)
    return root;
 }
 
+
+
+void pruneTree11(TreeNode *root, TreeNode *par, bool ll)
+{
+   if (root == nullptr)
+      return;
+   pruneTree11(root->left, root, true);
+   pruneTree11(root->right, root, false);
+
+   if (root->val == 0 && root->left == nullptr && root->right == nullptr)
+   {
+      if (ll)
+      {
+         par->left = nullptr;
+      }
+      else
+      {
+         par->right = nullptr;
+      }
+
+      delete root;
+      return;
+   }
+}
+//[leetcode 1325](https://leetcode.com/problems/delete-leaves-with-a-given-value/description/) : Delete Leaves With a Given Value
+TreeNode *pruneTree(TreeNode *root)
+{
+   if (root == nullptr )
+      return nullptr;
+   root->left  = pruneTree(root->left);
+   root->right = pruneTree(root->right);
+   if(!root->left && !root->right && root->val ==0){
+      return nullptr;
+   }
+   return root;
+}
+TreeNode *removeLeafNodes(TreeNode *root, int target)
+{
+   if (root == nullptr)
+      return root;
+   root->left = removeLeafNodes(root->left, target);
+   root->right = removeLeafNodes(root->right, target);
+   if (!root->left && !root->right && root->val == target)
+   {
+      delete root;
+      root = nullptr;
+      return nullptr;
+   }
+   return root;
+}
+
+bool isValidSerialization(std::string preorder)
+{
+   const int sz = preorder.size();
+   if(sz==0) return true;
+   
+}
+
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -965,6 +1023,17 @@ TreeNode *deleteNode(TreeNode *root, int key)
 
    auto rAA2 = buildBTUsingLevelOrder(vecAA);
    printBTLevelOrder(deleteNode(rAA2, 22));
+
+   auto rIter = buildBTUsingLevelOrder(vecAA);
+   
+   std::vector<int> vecPT{0,INT_MAX,0,0,0};
+   auto rPT = buildBTUsingLevelOrder(vecPT);
+   printBTLevelOrder(pruneTree(rPT));
+   
+
+   std::vector<int> vecRmLeaves{1,1,1};
+   auto rRmL = buildBTUsingLevelOrder(vecRmLeaves);
+   printBTLevelOrder(removeLeafNodes(rRmL, 1));
 //   nd11 = inorderPredecessorBST(rSucc,14 );
 //   if(nd11) std::cout<<curInt<<"  predecessor is "<<nd11->val<<std::endl;
     

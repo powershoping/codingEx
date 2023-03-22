@@ -1,6 +1,7 @@
 #ifndef BINARY_TREE_H
 #define BINARY_TREE_H 
 #include <vector>
+#include <stack>
 
 class TreeNode{
    public: 
@@ -11,7 +12,7 @@ class TreeNode{
       TreeNode(int data): TreeNode(){val = data;}
 };
 
-class BTIterator{
+class BSTIterator{
    private:
       std::stack<TreeNode *> stk;
       void pushToStack(TreeNode *root)

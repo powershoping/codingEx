@@ -29,6 +29,7 @@ Coding Examples
        - [leetcode 199](https://leetcode.com/problems/binary-tree-right-side-view/description/) : binary tree right side view
        - [leetcode 450](https://leetcode.com/problems/delete-node-in-a-bst/description/) : delete a node in a binary search tree
        - [leetcode 1325](https://leetcode.com/problems/delete-leaves-with-a-given-value/description/) : Delete Leaves With a Given Value
+       - [leetcode 542](https://leetcode.com/problems/diameter-of-binary-tree/description/) : diameter of a binary tree
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort
@@ -55,6 +56,7 @@ Coding Examples
     - [leetcode 2165](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/) :  Smallest value of the rearranged number
     - [leetcode 143](https://leetcode.com/problems/reorder-list/description/) : reorder the linked list
     - [leetcode 904](https://leetcode.com/problems/fruit-into-baskets/description/) : Fruit Into Baskets
+    - [leetcode 2401](https://leetcode.com/problems/longest-nice-subarray/description/): Longest Nice Subarray
     - [leetcode 287](https://leetcode.com/problems/find-the-duplicate-number/description/) : Find the duplicated number in an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive.
 6. Graph  : [graph.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/graph.cpp)
     - [leetcode 994](https://leetcode.com/problems/rotting-oranges/description) : Time for Oranges to get rotten

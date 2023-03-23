@@ -561,6 +561,33 @@ int findDuplicate(std::vector<int> &&nums)
    }
    return slow;
 }
+//[leetcode 2401](https://leetcode.com/problems/longest-nice-subarray/description/): Longest Nice Subarray
+int longestNiceSubarray(std::vector<int> &&nums)
+{
+   int res = 1;
+   int ii = 0;
+   int jj = 0;
+   int mask = 0;
+   const int sz = nums.size();
+   while (jj < sz)
+   {
+      if ((mask & nums[jj]) == 0)
+      {
+         mask |= nums[jj];
+         res = std::max(jj - ii + 1, res);
+         jj++;
+      }
+      else
+      {
+         while ((mask & nums[jj]) != 0)
+         {
+            mask &= (~nums[ii]);
+            ii++;
+         }
+      }
+   }
+   return res;
+}
 int main()
 {
     MedianFinder *obj = new MedianFinder();
@@ -601,6 +628,7 @@ int main()
 
     std::cout<<"Total Fruits= "<<totalFruit({1,2,1})<<std::endl;
     std::cout<<"Duplicate integer is: "<<findDuplicate({1,3,4,2,5,2})<<std::endl;
+    std::cout<<"Longest Nice Subarray : "<<longestNiceSubarray({1,3,8,48,10})<<std::endl;
 
 
 }

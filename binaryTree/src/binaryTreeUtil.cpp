@@ -51,6 +51,7 @@ TreeNode *buildBTUsingLevelOrder(const std::vector<int> &vecOrg)
 
 void printBTLevelOrder(TreeNode* root)
 {
+   std::cout<<"Level tranversal :"<<std::endl;
    if (root == nullptr)
    {
       std::cout << "null\n";

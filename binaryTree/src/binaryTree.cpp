@@ -896,6 +896,22 @@ TreeNode *removeLeafNodes(TreeNode *root, int target)
    }
    return root;
 }
+//[leetcode 542](https://leetcode.com/problems/diameter-of-binary-tree/description/) : diameter of a binary tree
+int diameterOfBinaryTree(TreeNode *root, int &maxD)
+{
+   if (root == nullptr)
+      return -1;
+   int ll = diameterOfBinaryTree(root->left, maxD) + 1;
+   int rr = diameterOfBinaryTree(root->right, maxD) + 1;
+   maxD = std::max(ll + rr, maxD);
+   return std::max(ll, rr);
+}
+int diameterOfBinaryTree(TreeNode *root)
+{
+   int maxD = -1;
+   diameterOfBinaryTree(root, maxD);
+   return maxD;
+}
 
 bool isValidSerialization(std::string preorder)
 {
@@ -914,7 +930,9 @@ bool isValidSerialization(std::string preorder)
    std::vector<int> vec00={5,4,8,11,INT_MAX,13,4,7,2,INT_MAX,INT_MAX,INT_MAX,1}; // level order
    auto root00 = buildBTUsingLevelOrder(vec00);
    printBTLevelOrder(root00);
+   std::cout<<"Zig-zag level tranversal : "<<std::endl;
    std::cout<<zigZagLevelTranversal(root00)<<std::endl;
+   std::cout<<"Diameter of a tree: "<<diameterOfBinaryTree(root00)<<std::endl;
 
    int targetSum = 22;
    std::vector<int> vecOrg={5,4,8,11,INT_MAX,13,4,7,2,INT_MAX,INT_MAX,INT_MAX,1}; // level order

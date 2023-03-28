@@ -58,6 +58,7 @@ Coding Examples
     - [leetcode 904](https://leetcode.com/problems/fruit-into-baskets/description/) : Fruit Into Baskets
     - [leetcode 2401](https://leetcode.com/problems/longest-nice-subarray/description/): Longest Nice Subarray
     - [leetcode 287](https://leetcode.com/problems/find-the-duplicate-number/description/) : Find the duplicated number in an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive.
+    - [leetcode 415](https://leetcode.com/problems/add-strings/description/) :  Add Strings
 6. Graph  : [graph.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/graph.cpp)
     - [leetcode 994](https://leetcode.com/problems/rotting-oranges/description) : Time for Oranges to get rotten
 

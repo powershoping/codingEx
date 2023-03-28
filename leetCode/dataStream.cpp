@@ -511,6 +511,28 @@ long long smallestNumber1(long long num)
 int totalFruit(std::vector<int> &&fruits)
 {
    std::unordered_map<int, int> umap;
+   int maxf = 0;
+   int lp = 0, rp = 0;
+   while (rp < fruits.size())
+   {
+      umap[fruits[rp]]++;
+      rp++;
+      while (umap.size() == 3)
+      {
+         umap[fruits[lp]]--;
+         if (umap[fruits[lp]] == 0)
+         {
+            umap.erase(fruits[lp]);
+         }
+         lp++;
+      }
+      maxf = std::max(maxf, rp - lp);
+   }
+   return maxf;
+}
+int totalFruit11(std::vector<int> &&fruits)
+{
+   std::unordered_map<int, int> umap;
    int maxf = 0, count = 0;
    int lp = 0, rp = 0;
    while (rp < fruits.size())
@@ -588,6 +610,40 @@ int longestNiceSubarray(std::vector<int> &&nums)
    }
    return res;
 }
+
+//[leetcode 415](https://leetcode.com/problems/add-strings/description/) :  Add Strings
+std::string addStrings(std::string num1, std::string num2)
+{
+   if (num1 == "0" && num2 == "0")
+      return "0";
+   if (num1.size() < num2.size())
+      return addStrings(num2, num1);
+   int ii = num1.size() - 1;
+   int jj = num2.size() - 1;
+   int carry = 0;
+   std::string res;
+   while (ii >= 0)
+   {
+      int d1 = num1[ii--] - '0';
+      int d2 = 0;
+      int sum = 0;
+      if (jj >= 0)
+      {
+         d2 = num2[jj--] - '0';
+      }
+      sum = d1 + d2 + carry;
+      carry = sum / 10;
+      char c = sum % 10 + '0';
+      res.push_back(c);
+   }
+   if (carry)
+      res.push_back('1');
+   std::reverse(res.begin(), res.end());
+   return res;
+}
+std::string multStringWithChar(std::string num1, char cc){
+  return ""; 
+}
 int main()
 {
     MedianFinder *obj = new MedianFinder();
@@ -630,5 +686,6 @@ int main()
     std::cout<<"Duplicate integer is: "<<findDuplicate({1,3,4,2,5,2})<<std::endl;
     std::cout<<"Longest Nice Subarray : "<<longestNiceSubarray({1,3,8,48,10})<<std::endl;
 
+    std::cout<<"addTwoString : "<<addStrings("263", "1989")<<std::endl;
 
 }

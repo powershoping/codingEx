@@ -61,6 +61,9 @@ Coding Examples
     - [leetcode 415](https://leetcode.com/problems/add-strings/description/) :  Add Strings
 6. Graph  : [graph.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/graph.cpp)
     - [leetcode 994](https://leetcode.com/problems/rotting-oranges/description) : Time for Oranges to get rotten
+    - [leetcode 200](https://leetcode.com/problems/number-of-islands/description/) : number of islands
+    - [leetcode 2049](https://leetcode.com/problems/count-nodes-with-the-highest-score/description/) : Count Nodes With the Highest Score
+    - [leetcode 2246](https://leetcode.com/problems/longest-path-with-different-adjacent-characters/description/) :  Longest Path With Different Adjacent Characters
 
 7. Numbers : [numbers.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/numbers.cpp) : Catalan Number, Fibonacci sequence
     - [leetcode 96](https://leetcode.com/problems/unique-binary-search-trees/description/) : Unique Binary Search Trees. Catalan Number

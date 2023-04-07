@@ -1,5 +1,5 @@
-#ifndef BST_BUILD_TCC
-#define BST_BUILD_TCC
+#ifndef BST_BUILD_HPP
+#define BST_BUILD_HPP
 
 #include<iostream>
 #include<vector>

@@ -6,6 +6,8 @@
 #include <deque>
 #include <algorithm>
 #include <iomanip>
+#include <cstring>
+#include <sstream>
 
 #include "binaryTree.h"
 #include "linkedList.h"
@@ -917,9 +919,162 @@ bool isValidSerialization(std::string preorder)
 {
    const int sz = preorder.size();
    if(sz==0) return true;
+   return false;
    
 }
+int countNode(TreeNode *root)
+{
+   if (root == nullptr)
+      return 0;
+   return countNode(root->left) + countNode(root->right) + 1;
+}
 
+// Encodes a tree to a single string.
+std::vector<int> serialize(TreeNode *root)
+{
+   if (root == nullptr)
+      return std::vector<int>{};
+   const unsigned int ll = 1  << 12;
+   const unsigned int rr = ll << 1;
+   std::vector<int> res;
+   res.resize(countNode(root));
+
+   std::queue<TreeNode *> myQ;
+   myQ.push(root);
+   int count = 0;
+   int val;
+   while (!myQ.empty())
+   {
+      const int sz = myQ.size();
+      for (int ii = 0; ii < sz; ++ii)
+      {
+         auto cur = myQ.front();
+         myQ.pop();
+         val = cur->val;
+         if (cur->left)
+         {
+            myQ.push(cur->left);
+            val |= ll;
+         }
+         if (cur->right)
+         {
+            myQ.push(cur->right);
+            val |= rr;
+         }
+         res[count] =val;
+         count ++;
+      }
+   }
+   return res;
+}
+
+// Decodes your encoded data to tree.
+TreeNode *deserialize(std::vector<int> data)
+{
+   if (data.size() == 0)
+      return nullptr;
+   unsigned int ll = 1  << 12;
+   unsigned int rr = ll << 1;
+   std::queue<TreeNode *> myQ;
+   const int sz = data.size();
+   int val=data[0];
+   TreeNode *root = new TreeNode(val);
+   myQ.push(root);
+   int count = 1;
+   while (count < sz)
+   {
+      const int szz = myQ.size();
+      for (int ii = 0; ii < szz; ++ii)
+      {
+         auto cur = myQ.front();
+         myQ.pop();
+         val = cur->val;
+         if (val & ll)
+         {
+            val &= ~ll;
+            int tmp=data[count];
+            TreeNode *newnode = new TreeNode(tmp);
+            cur->left = newnode;
+            myQ.push(newnode);
+            count ++;
+         }
+         if (val & rr)
+         {
+            val &= ~rr;
+            int tmp=data[count];
+            TreeNode *newnode = new TreeNode(tmp);
+            cur->right = newnode;
+            myQ.push(newnode);
+            count ++;
+         }
+         cur->val = val;
+      }
+   }
+
+   return root;
+}
+std::string serializeStr(TreeNode *root){
+  if(root==nullptr) return "#";
+  return std::to_string(root->val)+" "+serializeStr(root->left)+" "+serializeStr(root->right);
+//   return !root ? " null" : " " + std::to_string(root->val) + serializeStr(root->left) + serializeStr(root->right);
+}
+TreeNode *deserializeStr(std::istringstream  &ss){
+   std::string str1;
+   ss>>str1;
+   if(str1=="#")
+      return nullptr;
+   TreeNode *root = new TreeNode(std::stoi(str1));
+   root->left  = deserializeStr(ss);
+   root->right = deserializeStr(ss);
+   return root;
+}
+TreeNode *deserializeStr(std::string &str){
+   if(str.size()<3) return nullptr;
+   std::istringstream ss(str);
+
+   return deserializeStr(ss);
+}
+    // Encodes a tree to a single string.
+void serializeStrSHRT(TreeNode *root, std::string &str)
+{
+   short int val;
+   if (root == nullptr)
+   {
+      val = SHRT_MAX;
+      str.append(reinterpret_cast<char *>(&val), sizeof(val));
+      return;
+   }
+   val = root->val;
+   str.append(reinterpret_cast<char *>(&val), sizeof(val));
+   serializeStrSHRT(root->left, str);
+   serializeStrSHRT(root->right, str);
+   return;
+}
+std::string serializeStrSHRT(TreeNode *root)
+{
+   std::string str;
+   serializeStrSHRT(root, str);
+   return str;
+}
+TreeNode *deserializeStrSHRT(std::istringstream &ss)
+{
+   short int val;
+   ss.read(reinterpret_cast<char *>(&val), sizeof(val));
+   if (val == SHRT_MAX)
+      return nullptr;
+   TreeNode *root = new TreeNode(val);
+   root->left = deserializeStrSHRT(ss);
+   root->right = deserializeStrSHRT(ss);
+   return root;
+}
+    // Decodes your encoded data to tree.
+TreeNode *deserializeStrSHRT(std::string data)
+{
+   if (data.size() < 3)
+      return nullptr;
+   std::istringstream ss(data);
+   return deserializeStrSHRT(ss);
+}
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -945,7 +1100,6 @@ bool isValidSerialization(std::string preorder)
    printBTLevelOrder(root1);
    auto paths = pathSum(root1, targetSum);
    std::cout<<paths<<std::endl;
-
    std::cout<< pathSumByRef(root1, targetSum)<<std::endl;
 
    std::vector<int> vecDW = {8,5,-3,3,2,INT_MAX,11,8,-2,INT_MAX,1};
@@ -1047,14 +1201,54 @@ bool isValidSerialization(std::string preorder)
    std::vector<int> vecPT{0,INT_MAX,0,0,0};
    auto rPT = buildBTUsingLevelOrder(vecPT);
    printBTLevelOrder(pruneTree(rPT));
+
    
 
    std::vector<int> vecRmLeaves{1,1,1};
    auto rRmL = buildBTUsingLevelOrder(vecRmLeaves);
    printBTLevelOrder(removeLeafNodes(rRmL, 1));
+
+
+   std::vector<int> vec01{1,2,3,INT_MAX,INT_MAX,4,5};
+   auto rt01 = buildBTUsingLevelOrder(vec01);
+   std::cout<<"serialize tree"<<std::endl;
+   printBTLevelOrder(rt01);
+   auto vecInt1 = serialize(rt01);
+   auto rt011=deserialize(vecInt1);
+   printBTLevelOrder(rt011);
+
+   auto str2=serializeStr(rt01);
+   std::cout<<"serialized to string: "<<str2<<std::endl;
+   printBTLevelOrder(deserializeStr(str2));
+//   str2=serializeStrSHRT(rt01);
+   std::cout<<"serialized to string: "<<str2<<std::endl;
+   printBTLevelOrder(deserializeStrSHRT(str2));
 //   nd11 = inorderPredecessorBST(rSucc,14 );
 //   if(nd11) std::cout<<curInt<<"  predecessor is "<<nd11->val<<std::endl;
-    
+
+
+  std::string bstr0, bstr1;
+  bstr0.resize(12);
+  
+  int ii1=124, ii2=8956, ii3=13456;
+  memcpy(bstr0.data(),&ii1,sizeof(int));
+  memcpy(bstr0.data()+sizeof(int),&ii2,sizeof(int));
+  memcpy(bstr0.data()+2*sizeof(int),&ii3,sizeof(int));
+  bstr1.append(reinterpret_cast<char *>(&ii1),sizeof(int));
+  bstr1.append(reinterpret_cast<char *>(&ii2),sizeof(int));
+  bstr1.append(reinterpret_cast<char *>(&ii3),sizeof(int));
+  std::cout<<bstr0.size()<<"    "<<bstr1.size()<<std::endl;
+  std::cout<<sizeof(char)<<"   "<<sizeof(int)<<std::endl;
+
+  int val =*reinterpret_cast<const int*>(bstr1.data());
+  int tmp;
+  memcpy(&tmp, bstr0.data(),sizeof(int));
+  memcpy(&tmp, bstr0.data()+sizeof(int),sizeof(int));
+  memcpy(&tmp, bstr0.data()+2*sizeof(int),sizeof(int));
+  std::istringstream ss01(bstr1);
+  ss01.read(reinterpret_cast< char *>(&tmp), sizeof(int));
+  ss01.read(reinterpret_cast< char *>(&tmp), sizeof(int));
+  ss01.read(reinterpret_cast< char *>(&tmp), sizeof(int));
  }
 
 

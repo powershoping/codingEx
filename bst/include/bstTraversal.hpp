@@ -1,5 +1,5 @@
-#ifndef BST_TRAVERSAL_TCC
-#define BST_TRAVERSAL_TCC
+#ifndef BST_TRAVERSAL_HPP
+#define BST_TRAVERSAL_HPP
 
 #include <vector>
 #include <queue>

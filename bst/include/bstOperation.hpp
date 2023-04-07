@@ -1,5 +1,5 @@
-#ifndef BST_OPERATION_TCC
-#define BST_OPERATION_TCC
+#ifndef BST_OPERATION_HPP
+#define BST_OPERATION_HPP
 
 #include <algorithm>
 

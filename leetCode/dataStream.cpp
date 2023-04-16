@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <stack>
 #include <unordered_map>
 #include <set>
 #include "../tools/output_tools.h"
@@ -644,6 +645,122 @@ std::string addStrings(std::string num1, std::string num2)
 std::string multStringWithChar(std::string num1, char cc){
   return ""; 
 }
+//[leetcode 239](https://leetcode.com/problems/sliding-window-maximum/description/) :  Sliding Window Maximum
+// As this is a sliding window problem, the deque stores the index of the array. So we can check the sliding window length. 
+// the dq.front() store the left index (might be/not be the left most index as we remove some index from the dq), and ii is the right index. 
+std::vector<int> maxSlidingWindow(std::vector<int> &nums, int k)
+{
+  if (k == 1 || nums.size() <= 1)
+      return nums;
+  std::deque<int> dq; // needs to be a monotonic decreasing queue, but the deque store index of nums.
+  std::vector<int> result;
+  for (int ii = 0; ii < nums.size(); ++ii)
+  {
+      if (dq.size() && dq.front() == ii - k)
+         dq.pop_front(); // the window from dq.front() to ii was the last one so remove the front();
+      while (dq.size() && nums[ii] > nums[dq.back()])
+      {
+         dq.pop_back();
+      }
+      dq.push_back(ii);
+      if (ii >= k - 1)
+         result.push_back(nums[dq.front()]);
+  }
+  return result;
+}
+//[leetcode 11](https://leetcode.com/problems/container-with-most-water/description/) :  Container With Most Water
+// watch for the condition which decides whether increase ll or decrease rr. 
+// The logic is that moving the short line guarantees that we did not remove the area which could be larger than the current one.
+// height[ii]<height[jj], move ii to ii +1, means that we remove the areas of (ii, jj-1), (ii, jj-2), .. (ii, ii+1), all the areas are
+// smalller than (ii,jj) as the smaller height cannot be larger than height[ii], but the width decreases. 
+int maxArea(std::vector<int> &height)
+{
+  int rr = height.size() - 1;
+  int ll = 0;
+  int result = 0;
+  while (ll < rr)
+  {
+      result = std::max(result, std::min(height[ll], height[rr]) * (rr - ll));
+      if (height[ll] > height[rr])
+      {
+         --rr;
+      }
+      else
+      {
+         ++ll;
+      }
+  }
+  return result;
+}
+int trapWater(std::vector<int> &height)
+{
+  const int sz = height.size();
+  if (sz < 2)
+      return 0;
+  std::stack<int> stk; // the index of the height
+  stk.push(0);
+  int result = 0;
+  for (int ii = 1; ii < sz; ++ii)
+  {
+      int bi = stk.top(); // bottom ii
+      if (height[ii] >= height[bi])
+      { // ii = right ii;
+         stk.pop();
+         if (height[ii] > height[bi])
+         {
+            while (stk.size())
+            {
+               const int li = stk.top();
+               if (height[li] >= height[ii])
+               {
+                  result += (ii - li - 1) * (height[ii] - height[bi]);
+                  if (height[li] == height[ii])
+                     stk.pop();
+                  break;
+               }
+               else
+               {
+                  result += (ii - li - 1) * (height[li] - height[bi]);
+                  bi = li;
+                  stk.pop();
+               }
+            }
+         }
+      }
+      stk.push(ii);
+  }
+  return result;
+}
+//[leetcode 48](https://leetcode.com/problems/rotate-image/description/) : rotate matrix in-place
+void rotate(std::vector<std::vector<int>> &matrix, int ll, int rr)
+{
+  for (int ii = ll; ii < rr; ++ii)
+  {
+      const int tmp = matrix[ii][ll];
+      matrix[ii][ll] = matrix[rr][ii];
+      matrix[rr][ii] = matrix[rr - (ii - ll)][rr]; // 16
+      matrix[rr - (ii - ll)][rr] = matrix[ll][rr - (ii - ll)];
+      matrix[ll][rr - (ii - ll)] = tmp;
+  }
+
+  return;
+}
+void rotate(std::vector<std::vector<int>> &matrix)
+{
+  int sz = matrix.size();
+  if (sz == 1)
+      return;
+  int ll = 0;
+  int rr = sz - 1;
+  while (ll < rr)
+  {
+      rotate(matrix, ll, rr);
+      ll++;
+      rr--;
+  }
+  return;
+}
+
 int main()
 {
     MedianFinder *obj = new MedianFinder();
@@ -687,5 +804,13 @@ int main()
     std::cout<<"Longest Nice Subarray : "<<longestNiceSubarray({1,3,8,48,10})<<std::endl;
 
     std::cout<<"addTwoString : "<<addStrings("263", "1989")<<std::endl;
+    std::vector<int> vecSLM{1,3,1,2,0,5};
+    std::cout<<"Sliding window maximum=  "<<maxSlidingWindow(vecSLM, 3);
+    std::vector<int> vecWater{4,2,0,3,2,5};
+    std::cout<<trapWater(vecWater)<<std::endl;
+    std::vector<std::vector<int>> matrix{{5,1,9,11},{2,4,8,10},{13,3,6,7},{15,14,12,16}};
+    rotate(matrix);
+    std::cout<<matrix<<std::endl;
+
 
 }

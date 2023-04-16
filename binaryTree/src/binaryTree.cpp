@@ -13,6 +13,14 @@
 #include "linkedList.h"
 #include "output_tools.h"
 
+void preorderTrvsl(TreeNode *root, std::vector<int> &preorderVec)
+{
+   if(root==nullptr) return;
+   preorderVec.push_back(root->val);
+   preorderTrvsl(root->left,  preorderVec);
+   preorderTrvsl(root->right, preorderVec);
+   return ;
+}
 // [leetcode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/) : Binary Tree Zigzag Level Order Traversal
 std::vector<std::vector<int>> zigZagLevelTranversal(TreeNode* root)
 {
@@ -1075,6 +1083,32 @@ TreeNode *deserializeStrSHRT(std::string data)
    std::istringstream ss(data);
    return deserializeStrSHRT(ss);
 }
+//[leetcode 1008](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/) : build BST tree using preorder tranversal
+TreeNode *bstFromPreorder(const std::vector<int> &preorder, int minVal, int maxVal, int &pidx)
+{
+   if (pidx == preorder.size())
+      return nullptr;
+   const int val = preorder[pidx++];
+   if (val > maxVal || val < minVal)
+   {
+      --pidx;
+      return nullptr;
+   }
+
+   TreeNode *root = new TreeNode(val);
+   root->left = bstFromPreorder(preorder, minVal, val, pidx);
+   root->right = bstFromPreorder(preorder, val, maxVal, pidx);
+
+   return root;
+}
+TreeNode *bstFromPreorder(std::vector<int> &preorder)
+{
+   if (preorder.size() == 0)
+      return nullptr;
+   int minVal = INT_MIN, maxVal = INT_MAX;
+   int pidx = 0;
+   return bstFromPreorder(preorder, minVal, maxVal, pidx);
+}
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */
@@ -1220,12 +1254,18 @@ TreeNode *deserializeStrSHRT(std::string data)
    auto str2=serializeStr(rt01);
    std::cout<<"serialized to string: "<<str2<<std::endl;
    printBTLevelOrder(deserializeStr(str2));
-//   str2=serializeStrSHRT(rt01);
-   std::cout<<"serialized to string: "<<str2<<std::endl;
+   str2=serializeStrSHRT(rt01);
+//   std::cout<<"serialized to string: "<<str2<<std::endl;
    printBTLevelOrder(deserializeStrSHRT(str2));
 //   nd11 = inorderPredecessorBST(rSucc,14 );
 //   if(nd11) std::cout<<curInt<<"  predecessor is "<<nd11->val<<std::endl;
 
+   std::vector<int> vec02{8,5,10,1,7,INT_MAX,12};
+   auto rt02 = buildBTUsingLevelOrder(vec02);
+   std::vector<int> preorderVec;
+   preorderTrvsl(rt02, preorderVec);
+   std::cout<<"preorderVec"<<preorderVec<<std::endl;
+   printBTLevelOrder(bstFromPreorder(preorderVec));
 
   std::string bstr0, bstr1;
   bstr0.resize(12);

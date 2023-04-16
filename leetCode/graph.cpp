@@ -192,7 +192,7 @@ int longestPath(const std::vector<int> &parent, const std::vector<std::vector<in
    maxLen = std::max(maxLen, longest1 + longest2 + 1);
    return std::max(longest1, longest2) + 1;
 }
-//[2246](https://leetcode.com/problems/longest-path-with-different-adjacent-characters/description/) :  Longest Path With Different Adjacent Characters
+//[leetcode 2246](https://leetcode.com/problems/longest-path-with-different-adjacent-characters/description/) :  Longest Path With Different Adjacent Characters
 int longestPath(std::vector<int> &&parent, std::string &&s)
 {
    if (parent.size() < 2)

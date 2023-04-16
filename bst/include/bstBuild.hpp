@@ -90,17 +90,12 @@ BST<T>* BST<T>::buildTreeUsingPreInOrders(std::vector<T>& preorder, std::vector<
 template<typename T>
 BST<T>* BST<T>::buildSubTreeUsingPreInOrders(std::vector<T>& preorder,  std::vector<T>& inorder, std::unordered_map<T, int>& umap, int in_start, int in_end, int& pre_index)
 {
-   if(in_start>in_end)
+   if(in_start>in_end || pre_indx == preorder.size())
       return nullptr;
 
-   T data = preorder[pre_index];
-//   std::cout<<"pre_index"<<pre_index<<std::endl;
-   pre_index ++;
+   T data = preorder[pre_index++];
    auto cur_node = new BST<T>(data); // here post ++ is used as pre_index is used first then increase it by 1. 
    int in_index = umap[data];
-
-   if(in_start == in_end) 
-      return cur_node;
 
    cur_node->left  = buildSubTreeUsingPreInOrders(preorder, inorder, umap, in_start, in_index-1, pre_index); 
    cur_node->right = buildSubTreeUsingPreInOrders(preorder, inorder, umap, in_index+1, in_end, pre_index);

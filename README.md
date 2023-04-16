@@ -59,6 +59,10 @@ Coding Examples
     - [leetcode 2401](https://leetcode.com/problems/longest-nice-subarray/description/): Longest Nice Subarray
     - [leetcode 287](https://leetcode.com/problems/find-the-duplicate-number/description/) : Find the duplicated number in an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive.
     - [leetcode 415](https://leetcode.com/problems/add-strings/description/) :  Add Strings
+    - [leetcode 48](https://leetcode.com/problems/rotate-image/description/) : rotate matrix in-place
+    - [leetcode 239](https://leetcode.com/problems/sliding-window-maximum/description/) :  Sliding Window Maximum
+    - [leetcode 11](https://leetcode.com/problems/container-with-most-water/description/) :  Container With Most Water
+    
 6. Graph  : [graph.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/graph.cpp)
     - [leetcode 994](https://leetcode.com/problems/rotting-oranges/description) : Time for Oranges to get rotten
     - [leetcode 200](https://leetcode.com/problems/number-of-islands/description/) : number of islands

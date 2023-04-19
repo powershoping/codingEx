@@ -74,3 +74,5 @@ Coding Examples
 
 8. Strings : [strings.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/strings.cpp)
     - [leetcode 71](https://leetcode.com/problems/simplify-path/description/) : simplify path
+9. Dynamic Programming : [dynamicProgramming.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dynamicProgramming.cpp)
+    - [leetcode 70](https://leetcode.com/problems/climbing-stairs/description/) : climb stairs

@@ -692,8 +692,12 @@ int maxArea(std::vector<int> &height)
   }
   return result;
 }
+
+
+
 int trapWater(std::vector<int> &height)
 {
+   ladfj;adjkfadj Need rewrite
   const int sz = height.size();
   if (sz < 2)
       return 0;

@@ -72,5 +72,5 @@ Coding Examples
 7. Numbers : [numbers.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/numbers.cpp) : Catalan Number, Fibonacci sequence
     - [leetcode 96](https://leetcode.com/problems/unique-binary-search-trees/description/) : Unique Binary Search Trees. Catalan Number
 
-8. Strings : [strings.cpp]()
+8. Strings : [strings.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/strings.cpp)
     - [leetcode 71](https://leetcode.com/problems/simplify-path/description/) : simplify path

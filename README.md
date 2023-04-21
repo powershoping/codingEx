@@ -74,5 +74,6 @@ Coding Examples
 
 8. Strings : [strings.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/strings.cpp)
     - [leetcode 71](https://leetcode.com/problems/simplify-path/description/) : simplify path
+    - [leetcode 30](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/) :  Substring with Concatenation of All Words
 9. Dynamic Programming : [dynamicProgramming.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dynamicProgramming.cpp)
     - [leetcode 70](https://leetcode.com/problems/climbing-stairs/description/) : climb stairs

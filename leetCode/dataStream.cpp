@@ -765,6 +765,31 @@ void rotate(std::vector<std::vector<int>> &matrix)
   return;
 }
 
+//[leetcode 2260](https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/description/) : Minimum Consecutive Cards to Pick Up
+
+int minimumCardPickup(std::vector<int> &&cards)
+{
+  if (cards.size() < 2)
+      return -1;
+  std::unordered_map<int, int> umap;
+  int result = cards.size() + 2;
+  for (int ii = 0; ii < cards.size(); ++ii)
+  {
+      auto it = umap.find(cards[ii]);
+      if (it == umap.end())
+      {
+         umap[cards[ii]] = ii;
+      }
+      else
+      {
+         result = std::min(result, ii - umap[cards[ii]] + 1);
+         umap[cards[ii]] = ii;
+      }
+  }
+  return result == cards.size() + 2 ? -1 : result;
+}
+
+
 int main()
 {
     MedianFinder *obj = new MedianFinder();
@@ -815,6 +840,8 @@ int main()
     std::vector<std::vector<int>> matrix{{5,1,9,11},{2,4,8,10},{13,3,6,7},{15,14,12,16}};
     rotate(matrix);
     std::cout<<matrix<<std::endl;
+
+    std::cout<<"minimumCardPickup= "<<minimumCardPickup({3,4,2,3,4,7})<<std::endl;
 
 
 }

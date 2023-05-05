@@ -142,6 +142,38 @@ std::vector<int> findSubstring11(std::string str11, std::vector<std::string> &wo
 
    return results;
 }
+
+//[leetcode 38](https://leetcode.com/problems/count-and-say/description/) : Count and say
+std::string countAndSay(int n)
+{
+   std::string str1{"1"};
+   if (n == 1)
+      return str1;
+
+   for (int ii = 0; ii < n - 1; ++ii)
+   {
+      std::string curStr{};
+      int count = 1;
+      char cc = str1[0];
+      for (int jj = 1; jj < str1.size(); ++jj)
+      {
+         char ee = str1[jj];
+         if (ee == cc)
+         {
+            count++;
+         }
+         else
+         {
+            curStr += std::to_string(count) + cc;
+            count = 1;
+            cc = ee;
+         }
+      }
+      curStr += std::to_string(count) + cc;
+      str1 = curStr;
+   }
+   return str1;
+}
 int main(){
    std::string tmp;
    std::string path="/home//foo/";
@@ -176,5 +208,6 @@ int main(){
    std::string str1{"wordgoodgoodgoodbestword"};
    std::vector<std::string> vecStr00{"word","good","best","good"};
    std::cout<<findSubstring(str1, vecStr00)<<std::endl;
+   std::cout<<"Count and say 4: "<<countAndSay(4)<<std::endl;
    return 0;
 }

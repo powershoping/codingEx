@@ -789,6 +789,29 @@ int minimumCardPickup(std::vector<int> &&cards)
   return result == cards.size() + 2 ? -1 : result;
 }
 
+//[leetcode 2563](https://leetcode.com/problems/count-the-number-of-fair-pairs/) :  Count the Number of Fair Pairs
+
+long long countFairPairs(std::vector<int> &nums, int lower, int upper)
+{
+
+  std::sort(nums.begin(), nums.end());
+  long long int result = 0;
+  for (auto it = nums.begin(); it != nums.end(); ++it)
+  {
+      long int val = *it;
+      if (val >= 0 && val > upper)
+         break;
+      auto ll = std::lower_bound(it + 1, nums.end(), lower - val);
+      if (ll != nums.end())
+      {
+         auto uu = std::upper_bound(ll, nums.end(), upper - val);
+         result += std::distance(ll, uu);
+      }
+  }
+  return result;
+}
+
+
 
 int main()
 {
@@ -843,5 +866,7 @@ int main()
 
     std::cout<<"minimumCardPickup= "<<minimumCardPickup({3,4,2,3,4,7})<<std::endl;
 
+    std::vector<int> cFF{-5,-7,-5,-7,-5};
+    std::cout<<"count fair pair"<<countFairPairs(cFF, -12, -12)<<std::endl;
 
 }

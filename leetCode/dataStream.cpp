@@ -692,7 +692,7 @@ int maxArea(std::vector<int> &height)
   }
   return result;
 }
-
+//[leetcode 42 ](https://leetcode.com/problems/trapping-rain-water/) : Trapping rain water
 int trapWater(std::vector<int> &height)
 {
    int sz = height.size();

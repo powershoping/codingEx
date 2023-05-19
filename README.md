@@ -64,6 +64,7 @@ Coding Examples
     - [leetcode 48](https://leetcode.com/problems/rotate-image/description/) : rotate matrix in-place
     - [leetcode 239](https://leetcode.com/problems/sliding-window-maximum/description/) :  Sliding Window Maximum
     - [leetcode 11](https://leetcode.com/problems/container-with-most-water/description/) :  Container With Most Water
+    - [leetcode 42 ](https://leetcode.com/problems/trapping-rain-water/) : Trapping rain water
     - [leetcode 2260](https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/description/) : Minimum Consecutive Cards to Pick Up
     - [leetcode 2563](https://leetcode.com/problems/count-the-number-of-fair-pairs/) :  Count the Number of Fair Pairs
     
@@ -82,3 +83,4 @@ Coding Examples
     - [leetcode 38](https://leetcode.com/problems/count-and-say/description/) : Count and say
 9. Dynamic Programming : [dynamicProgramming.cpp](https://github.com/powershoping/codingEx/blob/master/leetCode/dynamicProgramming.cpp)
     - [leetcode 70](https://leetcode.com/problems/climbing-stairs/description/) : climb stairs
+    - [leetcode 322](https://leetcode.com/problems/coin-change/) : coin change

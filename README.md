@@ -30,6 +30,8 @@ Coding Examples
        - [leetcode 450](https://leetcode.com/problems/delete-node-in-a-bst/description/) : delete a node in a binary search tree
        - [leetcode 1325](https://leetcode.com/problems/delete-leaves-with-a-given-value/description/) : Delete Leaves With a Given Value
        - [leetcode 542](https://leetcode.com/problems/diameter-of-binary-tree/description/) : diameter of a binary tree
+       - [leetcode 652](https://leetcode.com/problems/find-duplicate-subtrees/) : Find Duplicate Subtrees
+       - [leetcode 1008](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/) 
 
 2. Sorting method:    
     - [Sort ](https://github.com/powershoping/codingEx/blob/master/sort/src/sort.cpp) :Selection sort, insertion sort, bubble sort, merge sort, quick sort, counting sort, and radix sort

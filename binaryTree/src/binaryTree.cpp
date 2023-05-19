@@ -1109,6 +1109,30 @@ TreeNode *bstFromPreorder(std::vector<int> &preorder)
    int pidx = 0;
    return bstFromPreorder(preorder, minVal, maxVal, pidx);
 }
+
+//[leetcode 652](https://leetcode.com/problems/find-duplicate-subtrees/) : Find Duplicate Subtrees
+std::vector<TreeNode *> findDuplicateSubtrees(TreeNode *root)
+{
+   std::vector<TreeNode *> result;
+   std::unordered_map<std::string, int> umapStr;
+   subtrees(root, umapStr, result);
+   return result;
+}
+std::string subtrees(TreeNode *root, unordered_map<std::string, int> &umapStr, std::vector<TreeNode *> &result)
+{
+   if (root == nullptr)
+      return "#";
+
+   std::string str;
+   str = std::to_string(root->val) + " " + subtrees(root->left, umapStr, result) + " " + subtrees(root->right, umapStr, result);
+
+   umapStr[str]++;
+   if (umapStr[str] == 2)
+   {
+      result.push_back(root);
+   }
+   return str;
+    }
 /***END END END END END END END *****************************************************/
 /*                                                                                  */
 /* Path from the root to a leaf                                                     */

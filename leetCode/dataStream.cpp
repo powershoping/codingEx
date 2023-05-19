@@ -693,11 +693,31 @@ int maxArea(std::vector<int> &height)
   return result;
 }
 
-
-
 int trapWater(std::vector<int> &height)
 {
-   ladfj;adjkfadj Need rewrite
+   int sz = height.size();
+   if (sz < 2)
+      return 0;
+   std::vector<int> lmax(sz, 0);
+   std::vector<int> rmax(sz, 0);
+   int result = 0;
+
+   for (int ii = 1; ii < sz; ++ii)
+   {
+      lmax[ii] = std::max(lmax[ii - 1], height[ii-1]);
+   }
+   for (int ii = sz - 2; ii >= 0; --ii)
+   {
+      rmax[ii] = std::max(rmax[ii + 1], height[ii+1]);
+   }
+   for(int ii = 1; ii<sz-1; ++ii){
+      result += std::max(0, std::min(lmax[ii], rmax[ii])-height[ii]);
+   }
+   return result;
+}
+
+int trapWater11(std::vector<int> &height)
+{
   const int sz = height.size();
   if (sz < 2)
       return 0;
